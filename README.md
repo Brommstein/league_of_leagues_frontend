@@ -1,3 +1,9 @@
+# League of Leagues Front End Portion
+
+The backbone/user interface portion of my Thinkful Capstone project.
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
