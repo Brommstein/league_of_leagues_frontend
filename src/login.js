@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 export default function loginForm() {
     return (
         <div>
-            <h1>League of Leagues</h1>
             <form action="loginUser" className="border">
                 <label htmlFor="username">Username: </label>
                 <input type="text" id="username" required></input>
