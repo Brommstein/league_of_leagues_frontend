@@ -12,16 +12,44 @@ const CreateAccount = () => {
         const secondaryRole = document.getElementById('secondaryRole').value;
         const boxesChecked = document.querySelectorAll('input[type="checkbox"]:checked');
         const availability = [];
+        let sunday = false;
+        let monday = false;
+        let tuesday = false;
+        let wednesday = false;
+        let thursday = false;
+        let friday = false;
+        let saturday = false;
 
-        for (let i = 0; i < boxesChecked.length; i++){
+        for (let i = 0; i < boxesChecked.length; i++) {
             availability.push(boxesChecked[i].value);
         }
 
-        console.log(boxesChecked);
+        for (let i = 0; i < availability.length; i++) {
+            if (availability[i] === 'sunday') { sunday = true };
+            if (availability[i] === 'monday') { monday = true };
+            if (availability[i] === 'tuesday') { tuesday = true };
+            if (availability[i] === 'wednesday') { wednesday = true };
+            if (availability[i] === 'thursday') { thursday = true };
+            if (availability[i] === 'friday') { friday = true };
+            if (availability[i] === 'saturday') { saturday = true };
+        }
+
         console.log(availability);
+        console.log(sunday, monday, tuesday, wednesday, thursday, friday, saturday);
 
         try {
-            const body = { leaguename: leagueName, preferedrole: preferedRole, secondaryrole: secondaryRole };
+            const body = {
+                leaguename: leagueName,
+                preferedrole: preferedRole,
+                secondaryrole: secondaryRole,
+                sunday: sunday,
+                monday: monday,
+                tuesday: tuesday,
+                wednesday: wednesday,
+                thursday: thursday,
+                friday: friday,
+                saturday: saturday
+            };
             // eslint-disable-next-line no-unused-vars
             const response = await fetch("http://localhost:5000/users", {
                 method: "POST",
