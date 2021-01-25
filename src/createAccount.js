@@ -34,9 +34,6 @@ const CreateAccount = () => {
             if (availability[i] === 'saturday') { saturday = true };
         }
 
-        console.log(availability);
-        console.log(sunday, monday, tuesday, wednesday, thursday, friday, saturday);
-
         try {
             const body = {
                 leaguename: leagueName,
@@ -50,6 +47,7 @@ const CreateAccount = () => {
                 friday: friday,
                 saturday: saturday
             };
+
             // eslint-disable-next-line no-unused-vars
             const response = await fetch("http://localhost:5000/users", {
                 method: "POST",
@@ -65,9 +63,9 @@ const CreateAccount = () => {
     }
 
     return (
-        <div>
-            <form className="border" onSubmit={onSubmit}>
-                <h2>Create your account</h2>
+        <div className="border">
+            <label htmlFor="editAccount"><h2>Edit Account</h2></label>
+            <form name="editAccount" onSubmit={onSubmit}>
 
                 {/*
                 <label htmlFor="username">Username: </label>
@@ -79,7 +77,7 @@ const CreateAccount = () => {
                 */}
 
                 <label htmlFor="leagueName">What is your name on League of Legends? </label>
-                <input type="text" value={leagueName} onChange={e => setLeagueName(e.target.value)} required></input>
+                <input id="leagueName" type="text" value={leagueName} onChange={e => setLeagueName(e.target.value)} required></input>
                 <p></p>
                 <label htmlFor="preferedRole">What is your prefered role? </label>
                 <select name="preferedRole" id="preferedRole">
@@ -104,36 +102,37 @@ const CreateAccount = () => {
                     <p>What day are you able to play?</p>
                     <div className="flexBox" id="availability">
                         <div className="flex">
-                            <input type="checkbox" name="sundayBox" value="sunday"></input>
+                            <input type="checkbox" id="sundayBox" value="sunday"></input>
                             <label htmlFor="sundayBox">Sunday</label>
                         </div>
                         <div className="flex">
-                            <input type="checkbox" name="mondayBox" value="monday"></input>
+                            <input type="checkbox" id="mondayBox" value="monday"></input>
                             <label htmlFor="mondayBox">Monday</label>
                         </div>
                         <div className="flex">
-                            <input type="checkbox" name="tuesdayBox" value="tuesday"></input>
+                            <input type="checkbox" id="tuesdayBox" value="tuesday"></input>
                             <label htmlFor="tuesdayBox">Tuesday</label>
                         </div>
                         <div className="flex">
-                            <input type="checkbox" name="wednesdayBox" value="wednesday"></input>
+                            <input type="checkbox" id="wednesdayBox" value="wednesday"></input>
                             <label htmlFor="wednesdayBox">Wednesday</label>
                         </div>
                         <div className="flex">
-                            <input type="checkbox" name="thursdayBox" value="thursday"></input>
+                            <input type="checkbox" id="thursdayBox" value="thursday"></input>
                             <label htmlFor="thursdayBox">Thursday</label>
                         </div>
                         <div className="flex">
-                            <input type="checkbox" name="fridayBox" value="friday"></input>
+                            <input type="checkbox" id="fridayBox" value="friday"></input>
                             <label htmlFor="fridayBox">Friday</label>
                         </div>
                         <div className="flex">
-                            <input type="checkbox" name="saturdayBox" value="saturday"></input>
+                            <input type="checkbox" id="saturdayBox" value="saturday"></input>
                             <label htmlFor="saturdayBox">Saturday</label>
                         </div>
                     </div>
                 </div>
                 <p></p>
+                
                 {/*
                 <label htmlFor="championChoice">What champions do you play?</label>
                 <p></p>

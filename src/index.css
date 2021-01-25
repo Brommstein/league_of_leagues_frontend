@@ -24,6 +24,8 @@ body {
 
 .flex {
   flex: 1;
+  min-width: 215px;
+  min-height: 105px;
 }
 
 .border {
