@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+//CREATE USER AUTH TO CONNECT TO OTHER PAGES
+
 const CreateAccount = () => {
 
     const [leagueName, setLeagueName] = useState("");
@@ -8,6 +10,7 @@ const CreateAccount = () => {
     const onSubmit = async (e) => {
 
         e.preventDefault();
+
         const preferedRole = document.getElementById('preferedRole').value;
         const secondaryRole = document.getElementById('secondaryRole').value;
         const boxesChecked = document.querySelectorAll('input[type="checkbox"]:checked');
@@ -55,7 +58,7 @@ const CreateAccount = () => {
                 body: JSON.stringify(body)
             });
 
-            //window.location = "/";
+            window.location = "/";
 
         } catch (err) {
             console.error(err.message);
@@ -64,8 +67,8 @@ const CreateAccount = () => {
 
     return (
         <div className="border">
-            <label htmlFor="editAccount"><h2>Edit Account</h2></label>
-            <form name="editAccount" onSubmit={onSubmit}>
+            <label htmlFor="createAccount"><h2>Create an Account</h2></label>
+            <form name="createAccount" onSubmit={onSubmit}>
 
                 {/*
                 <label htmlFor="username">Username: </label>
@@ -131,31 +134,6 @@ const CreateAccount = () => {
                         </div>
                     </div>
                 </div>
-                <p></p>
-                
-                {/*
-                <label htmlFor="championChoice">What champions do you play?</label>
-                <p></p>
-                <div className="flexBox">
-                    <div className="flex">
-                        <select>
-                            <option>Ahri</option>
-                        </select>
-                    </div>
-                    <div className="flex">
-                        <select>
-                            <option>Braum</option>
-                        </select>
-                    </div>
-                    <div className="flex">
-                        <select>
-                            <option>Cassiopia</option>
-                        </select>
-                    </div>
-                </div>
-                <p></p>
-                */}
-
                 <button type="submit">Submit</button>
                 <Link to="/">Cancel</Link>
             </form>

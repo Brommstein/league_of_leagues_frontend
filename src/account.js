@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+//NEED TO CONNECT USER ID TO PAGE FOR PAGE TO WORK VIA USER AUTH
+
 const AccountEdit = () => {
 
     const [leagueName, setLeagueName] = useState("");
@@ -35,9 +37,6 @@ const AccountEdit = () => {
             if (availability[i] === 'saturday') { saturday = true };
         }
 
-        console.log(availability);
-        console.log(sunday, monday, tuesday, wednesday, thursday, friday, saturday);
-
         try {
             const body = {
                 leaguename: leagueName,
@@ -51,14 +50,15 @@ const AccountEdit = () => {
                 friday: friday,
                 saturday: saturday
             };
+
             // eslint-disable-next-line no-unused-vars
             const response = await fetch("http://localhost:5000/users", {
-                method: "POST",
+                method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(body)
             });
 
-            //window.location = "/";
+            window.location = "/";
 
         } catch (err) {
             console.error(err.message);
@@ -67,6 +67,7 @@ const AccountEdit = () => {
 
     return (
         <div className="border">
+            <h2>New user cannot see this page</h2>
             <label htmlFor="editAccount"><h2>Edit Account</h2></label>
             <form name="editAccount" onSubmit={onSubmit}>
 
@@ -133,30 +134,6 @@ const AccountEdit = () => {
                     </div>
                 </div>
                 <p></p>
-
-                {/* 
-                <label htmlFor="championChoice">What champions do you play?</label>
-                <p></p>
-                <div className="flexBox">
-                    <div className="flex">
-                        <select>
-                            <option>Ahri</option>
-                        </select>
-                    </div>
-                    <div className="flex">
-                        <select>
-                            <option>Braum</option>
-                        </select>
-                    </div>
-                    <div className="flex">
-                        <select>
-                            <option>Cassiopia</option>
-                        </select>
-                    </div>
-                </div>
-                <p></p>
-                */}
-
                 <button typeof="submit">Submit</button>
                 <Link to="/">Cancel</Link>
             </form>
