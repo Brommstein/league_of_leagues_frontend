@@ -47,21 +47,18 @@ const CreateTeam = () => {
 
         const teamName = document.getElementById('teamName').value;
         const teamAbr = document.getElementById('teamAbr').value;
-        const captainid = document.getElementById('captain').getAttribute('uid');
         const captain = document.getElementById('captain').value;
-        console.log(document.getElementById('captain').getAttribute('userid'));
-        const topid = document.getElementById('topLaner').getAttribute('key');
+        const captainid = document.getElementById(captain).getAttribute('uid');
         const top = document.getElementById('topLaner').value;
-        const jungleid = document.getElementById('jungler').getAttribute('key');
+        const topid = document.getElementById(top).getAttribute('uid');
         const jungle = document.getElementById('jungler').value;
-        const midid = document.getElementById('midLaner').getAttribute('key');
+        const jungleid = document.getElementById(jungle).getAttribute('uid');
         const mid = document.getElementById('midLaner').value;
-        const adcid = document.getElementById('adcLaner').getAttribute('key');
+        const midid = document.getElementById(mid).getAttribute('uid');
         const adc = document.getElementById('adcLaner').value;
-        const supportid = document.getElementById('supportLaner').getAttribute('key');
+        const adcid = document.getElementById(adc).getAttribute('uid');
         const support = document.getElementById('supportLaner').value;
-
-        console.log('captain id', captainid);
+        const supportid = document.getElementById(support).getAttribute('uid');
 
         try {
 
@@ -112,7 +109,7 @@ const CreateTeam = () => {
                         <select name="captain" id="captain">
                         <option key="" userid="" value=""></option>
                             {allUsers.map(allUsers => (
-                                <option key={allUsers.userid} uid={allUsers.userid} value={allUsers.leaguename}>{allUsers.leaguename}</option>
+                                <option key={allUsers.userid} uid={allUsers.userid} id={allUsers.leaguename} value={allUsers.leaguename}>{allUsers.leaguename}</option>
                             ))}
                         </select>
                         <p></p>
@@ -120,7 +117,7 @@ const CreateTeam = () => {
                         <select name="top" id="topLaner">
                             <option value=""></option>
                             {topPlayers.map(topPlayers => (
-                                <option key={topPlayers.userid} value={topPlayers.leaguename}>{topPlayers.leaguename}</option>
+                                <option key={topPlayers.userid} uid={topPlayers.userid} id={topPlayers.leaguename} value={topPlayers.leaguename}>{topPlayers.leaguename}</option>
                             ))}
                         </select>
                         <p></p>
@@ -128,7 +125,7 @@ const CreateTeam = () => {
                         <select name="jungle" id="jungler">
                             <option value=""></option>
                             {junglePlayers.map(junglePlayers => (
-                                <option key={junglePlayers.userid} value={junglePlayers.leaguename}>{junglePlayers.leaguename}</option>
+                                <option key={junglePlayers.userid} uid={junglePlayers.userid} id={junglePlayers.leaguename} value={junglePlayers.leaguename}>{junglePlayers.leaguename}</option>
                             ))}
                         </select>
                         <p></p>
@@ -136,7 +133,7 @@ const CreateTeam = () => {
                         <select name="mid" id="midLaner">
                             <option value=""></option>
                             {midPlayers.map(midPlayers => (
-                                <option key={midPlayers.userid} value={midPlayers.leaguename}>{midPlayers.leaguename}</option>
+                                <option key={midPlayers.userid} uid={midPlayers.userid} id={midPlayers.leaguename} value={midPlayers.leaguename}>{midPlayers.leaguename}</option>
                             ))}
                         </select>
                         <p></p>
@@ -144,7 +141,7 @@ const CreateTeam = () => {
                         <select name="adc" id="adcLaner">
                             <option value=""></option>
                             {adcPlayers.map(adcPlayers => (
-                                <option key={adcPlayers.userid} value={adcPlayers.leaguename}>{adcPlayers.leaguename}</option>
+                                <option key={adcPlayers.userid} uid={adcPlayers.userid} id={adcPlayers.leaguename} value={adcPlayers.leaguename}>{adcPlayers.leaguename}</option>
                             ))}
                         </select>
                         <p></p>
@@ -152,7 +149,7 @@ const CreateTeam = () => {
                         <select name="support" id="supportLaner">
                             <option value=""></option>
                             {supportPlayers.map(supportPlayers => (
-                                <option key={supportPlayers.userid} value={supportPlayers.leaguename}>{supportPlayers.leaguename}</option>
+                                <option key={supportPlayers.userid} uid={supportPlayers.userid} id={supportPlayers.leaguename} value={supportPlayers.leaguename}>{supportPlayers.leaguename}</option>
                             ))}
                         </select>
                         <p></p>
