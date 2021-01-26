@@ -47,7 +47,7 @@ const CreateTeam = () => {
 
         const teamName = document.getElementById('teamName').value;
         const teamAbr = document.getElementById('teamAbr').value;
-        const captainid = document.getElementById('captain').getAttribute('uid').value;
+        const captainid = document.getElementById('captain').getAttribute('uid');
         const captain = document.getElementById('captain').value;
         console.log(document.getElementById('captain').getAttribute('userid'));
         const topid = document.getElementById('topLaner').getAttribute('key');
