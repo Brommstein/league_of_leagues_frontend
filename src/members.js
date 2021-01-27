@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
+//To Do!
+/*
+    Connect teams api to show team/freelance on players
+    If user logged in then keeep logout but if new user set to login
+
+*/
+
 const Members = () => {
 
     const [topPlayers, setTopPlayers] = useState([]);
@@ -26,6 +33,12 @@ const Members = () => {
                             if (users[i].preferedrole === 'mid') { setMidPlayer(midPlayers => [...midPlayers, users[i]]) };
                             if (users[i].preferedrole === 'adc') { setAdcPlayer(adcPlayers => [...adcPlayers, users[i]]) };
                             if (users[i].preferedrole === 'support') { setSupportPlayer(supportPlayers => [...supportPlayers, users[i]]) };
+
+                            if (users[i].secondaryrole === 'top') { setTopPlayers(topPlayers => [...topPlayers, users[i]]) };
+                            if (users[i].secondaryrole === 'jungle') { setJunglePlayers(junglePlayers => [...junglePlayers, users[i]]) };
+                            if (users[i].secondaryrole === 'mid') { setMidPlayer(midPlayers => [...midPlayers, users[i]]) };
+                            if (users[i].secondaryrole === 'adc') { setAdcPlayer(adcPlayers => [...adcPlayers, users[i]]) };
+                            if (users[i].secondaryrole === 'support') { setSupportPlayer(supportPlayers => [...supportPlayers, users[i]]) };
                         }
                     }
                 );
@@ -41,18 +54,6 @@ const Members = () => {
 
     return (
         <div>
-
-            {/*
-                <div className="flexBox">
-                    <div className="flex border">
-                        <h4>Bailey</h4>
-                        <p>Team: TNP</p>
-                        <p>Top 3 Champs:</p>
-                        <p>Darius, Garen, Gnar</p>
-                    </div>
-                </div>
-                */}
-
             {isLoading && <div>Page is loading</div>}
             {!isLoading && <div>
                 <section>
@@ -65,13 +66,16 @@ const Members = () => {
                 </section>
 
                 <section>
+                <h2>Needs to be worked on! (Design)</h2>
                     <h3>Top Laners</h3>
                     <div className="flexBox">
                         {topPlayers.map(topPlayers => (
                             <div key={topPlayers.userid}>
                                 <div className="flex border">
                                     <h4>{topPlayers.leaguename}</h4>
-                                    <h4>{topPlayers.userid}</h4>
+                                    <h4>Team: ___</h4>
+                                    <p>Primary role: {topPlayers.preferedrole}</p>
+                                    {topPlayers.secondaryrole && <p>Secondary role: {topPlayers.secondaryrole}</p>}
                                 </div>
                             </div>
                         ))}
@@ -86,7 +90,9 @@ const Members = () => {
                             <div key={junglePlayers.userid}>
                                 <div className="flex border">
                                     <h4>{junglePlayers.leaguename}</h4>
-                                    <h4>{junglePlayers.userid}</h4>
+                                    <h4>Team: ___</h4>
+                                    <p>Primary role: {junglePlayers.preferedrole}</p>
+                                    {junglePlayers.secondaryrole && <p>Secondary role: {junglePlayers.secondaryrole}</p>}
                                 </div>
                             </div>
                         ))}
@@ -101,7 +107,9 @@ const Members = () => {
                             <div key={midPlayers.userid}>
                                 <div className="flex border">
                                     <h4>{midPlayers.leaguename}</h4>
-                                    <h4>{midPlayers.userid}</h4>
+                                    <h4>Team: ___</h4>
+                                    <p>Primary role: {midPlayers.preferedrole}</p>
+                                    {midPlayers.secondaryrole && <p>Secondary role: {midPlayers.secondaryrole}</p>}
                                 </div>
                             </div>
                         ))}
@@ -116,7 +124,9 @@ const Members = () => {
                             <div key={adcPlayers.userid}>
                                 <div className="flex border">
                                     <h4>{adcPlayers.leaguename}</h4>
-                                    <h4>{adcPlayers.userid}</h4>
+                                    <h4>Team: ___</h4>
+                                    <p>Primary role: {adcPlayers.preferedrole}</p>
+                                    {adcPlayers.secondaryrole && <p>Secondary role: {adcPlayers.secondaryrole}</p>}
                                 </div>
                             </div>
                         ))}
@@ -131,7 +141,9 @@ const Members = () => {
                             <div key={supportPlayers.userid}>
                                 <div className="flex border">
                                     <h4>{supportPlayers.leaguename}</h4>
-                                    <h4>{supportPlayers.userid}</h4>
+                                    <h4>Team: ___</h4>
+                                    <p>Primary role: {supportPlayers.preferedrole}</p>
+                                    {supportPlayers.secondaryrole && <p>Secondary role: {supportPlayers.secondaryrole}</p>}
                                 </div>
                             </div>
                         ))}

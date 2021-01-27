@@ -14,6 +14,7 @@ export default function schedule() {
             </section>
             <section>
                 <h2>New user cannot see this page</h2>
+                <h2>Needs to be worked on!</h2>
                 <h2>Availability</h2>
                 <form action="setAvailability" className="border">
                     <p>What day are you looking to play?</p>

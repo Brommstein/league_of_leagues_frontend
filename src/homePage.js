@@ -22,6 +22,7 @@ export default function homePage() {
                                 <Link to="/login" className="flex">Login</Link>
                             </div>
                         </nav>
+                        <h2>Needs to be worked on!</h2>
                         <h2>Upcoming Games!</h2>
                         <div className="border">
                             <div className="flexBox">

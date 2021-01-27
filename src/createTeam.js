@@ -21,7 +21,7 @@ const CreateTeam = () => {
                 .then(usersResponse => usersResponse.json())
                 .then(
                     users => {
-                        
+
                         for (let i = 0; i < users.length; i++) {
                             setAllUsers(allUsers => [...allUsers, users[i]]);
                             if (users[i].preferedrole === 'top') { setTopPlayers(topPlayers => [...topPlayers, users[i]]) };
@@ -29,6 +29,12 @@ const CreateTeam = () => {
                             if (users[i].preferedrole === 'mid') { setMidPlayer(midPlayers => [...midPlayers, users[i]]) };
                             if (users[i].preferedrole === 'adc') { setAdcPlayer(adcPlayers => [...adcPlayers, users[i]]) };
                             if (users[i].preferedrole === 'support') { setSupportPlayer(supportPlayers => [...supportPlayers, users[i]]) };
+
+                            if (users[i].secondaryrole === 'top') { setTopPlayers(topPlayers => [...topPlayers, users[i]]) };
+                            if (users[i].secondaryrole === 'jungle') { setJunglePlayers(junglePlayers => [...junglePlayers, users[i]]) };
+                            if (users[i].secondaryrole === 'mid') { setMidPlayer(midPlayers => [...midPlayers, users[i]]) };
+                            if (users[i].secondaryrole === 'adc') { setAdcPlayer(adcPlayers => [...adcPlayers, users[i]]) };
+                            if (users[i].secondaryrole === 'support') { setSupportPlayer(supportPlayers => [...supportPlayers, users[i]]) };
                         }
                     }
                 );
@@ -79,7 +85,14 @@ const CreateTeam = () => {
                 support: support
             }
 
-            console.table(body);
+            // eslint-disable-next-line no-unused-vars
+            const response = await fetch('http://localhost:5000/teams', {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(body)
+            });
+
+            console.table(response);
 
             //window.location = "/teams";
 
@@ -97,6 +110,7 @@ const CreateTeam = () => {
             {isLoading && <div>Page is loading</div>}
             {!isLoading && <div>
                 <h2>New user cannot see this page</h2>
+                <h2>Needs to be worked on!</h2>
                 <form className="border" onSubmit={onSubmit}>
                     <section>
                         <label htmlFor="teamName">What is your team's name?</label>
@@ -107,7 +121,7 @@ const CreateTeam = () => {
                         <p></p>
                         <label htmlFor="captain">Who is the team leader? </label>
                         <select name="captain" id="captain">
-                        <option key="" userid="" value=""></option>
+                            <option key="" userid="" value=""></option>
                             {allUsers.map(allUsers => (
                                 <option key={allUsers.userid} uid={allUsers.userid} id={allUsers.leaguename} value={allUsers.leaguename}>{allUsers.leaguename}</option>
                             ))}
