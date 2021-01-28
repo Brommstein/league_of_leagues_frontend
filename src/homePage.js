@@ -23,7 +23,9 @@ export default function homePage() {
                             </div>
                         </nav>
                         <h2>Needs to be worked on!</h2>
-                        <h2>Upcoming Games!</h2>
+                        <h1>Upcoming Games!</h1>
+                        <br></br>
+                        <h2>Official Games!</h2>
                         <div className="border">
                             <div className="flexBox">
                                 <div className="flex">
@@ -35,6 +37,22 @@ export default function homePage() {
                                 </div>
                             </div>
                             <h4>Date: Janurary 15, 2021 @ 06:00pm cst</h4>
+                            <button type="button">Cancel Game</button>
+                        </div>
+                        <br></br>
+                        <h2>Scrim Games!</h2>
+                        <div className="border">
+                            <div className="flexBox">
+                                <div className="flex">
+                                    <h2>TNP</h2>
+                                </div>
+                                <h4 className="flex">VS</h4>
+                                <div className="flex">
+                                    <h2>BSG</h2>
+                                </div>
+                            </div>
+                            <h4>Date: Janurary 16, 2021 @ 08:00pm cst</h4>
+                            <button type="button">Cancel Game</button>
                         </div>
                     </Route>
                     <Route path="/teams">

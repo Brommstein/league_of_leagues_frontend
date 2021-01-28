@@ -5,12 +5,20 @@ import { Link } from 'react-router-dom';
 
 const CreateAccount = () => {
 
+    //set input values
+    const [userName, setUserName] = useState('');
+    const [password, setPassword] = useState('');
+    const [retype, setRetype] = useState('');
     const [leagueName, setLeagueName] = useState("");
 
+    //submit button
     const onSubmit = async (e) => {
 
         e.preventDefault();
 
+        //Check passwords match
+
+        //set body values
         const preferedRole = document.getElementById('preferedRole').value;
         const secondaryRole = document.getElementById('secondaryRole').value;
         const boxesChecked = document.querySelectorAll('input[type="checkbox"]:checked');
@@ -27,6 +35,7 @@ const CreateAccount = () => {
             availability.push(boxesChecked[i].value);
         }
 
+        //check for selected options
         for (let i = 0; i < availability.length; i++) {
             if (availability[i] === 'sunday') { sunday = true };
             if (availability[i] === 'monday') { monday = true };
@@ -38,7 +47,8 @@ const CreateAccount = () => {
         }
 
         try {
-            const body = {
+            //body for /users db
+            const userBody = {
                 leaguename: leagueName,
                 preferedrole: preferedRole,
                 secondaryrole: secondaryRole,
@@ -52,13 +62,33 @@ const CreateAccount = () => {
             };
 
             // eslint-disable-next-line no-unused-vars
-            const response = await fetch("http://localhost:5000/users", {
+            const usersResponse = await fetch("http://localhost:5000/users", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(body)
+                body: JSON.stringify(userBody)
             });
 
-            window.location = "/";
+            const userid = await fetch('http://localhost:5000/users', {
+                method: "GET"
+            })
+            .then(userResponse => userResponse.json())
+            .then(uResponse => uResponse.pop().userid);
+
+            //body for /accounts db
+            const accountBody = {
+                userid: userid,
+                username: userName,
+                password: password
+            }
+
+            // eslint-disable-next-line no-unused-vars
+            const accountResponse = await fetch("http://localhost:5000/accounts", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(accountBody)
+            })
+
+            //window.location = "/";
 
         } catch (err) {
             console.error(err.message);
@@ -70,15 +100,16 @@ const CreateAccount = () => {
             <label htmlFor="createAccount"><h2>Create an Account</h2></label>
             <form name="createAccount" onSubmit={onSubmit}>
 
-                {/*
+                
                 <label htmlFor="username">Username: </label>
-                <input type="text" id="username" required></input>
+                <input type="text" id="username" value={userName} onChange={e => setUserName(e.target.value)} required></input>
                 <p></p>
                 <label htmlFor="password">Password: </label>
-                <input type="password" id="password" required></input>
+                <input type="password" id="password" value={password} onChange={e => setPassword(e.target.value)} required></input>
                 <p></p>
-                */}
-
+                <label htmlFor="retype">Retype the Password: </label>
+                <input type="password" id="retype" value={retype} onChange={e => setRetype(e.target.value)} required></input>
+                <p></p>
                 <label htmlFor="leagueName">What is your name on League of Legends? </label>
                 <input id="leagueName" type="text" value={leagueName} onChange={e => setLeagueName(e.target.value)} required></input>
                 <p></p>

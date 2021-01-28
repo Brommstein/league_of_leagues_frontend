@@ -48,24 +48,27 @@ const Teams = () => {
                 </section>
                 <section>
                     <h2>Current Teams</h2>
-                    <div className="border">
-                        {allTeams.map(allTeams => (
+                    {allTeams.map(allTeams => (
+                        <div className="border">
                             <div key={allTeams.teamid} className="flexBox">
                                 <div className="flex">
                                     <h2>{allTeams.teamabr}</h2>
                                     <h3>{allTeams.teamname}</h3>
                                     <h4>Captain: {allTeams.captain}</h4>
                                 </div>
-                            <div className="flex">
-                                <p>Top: {allTeams.top}</p>
-                                <p>Jungle: {allTeams.jungle}</p>
-                                <p>Mid: {allTeams.mid}</p>
-                                <p>ADC: {allTeams.adc}</p>
-                                <p>Support: {allTeams.support}</p>
+                                <div className="flex">
+                                    <p>Top: {allTeams.top}</p>
+                                    <p>Jungle: {allTeams.jungle}</p>
+                                    <p>Mid: {allTeams.mid}</p>
+                                    <p>ADC: {allTeams.adc}</p>
+                                    <p>Support: {allTeams.support}</p>
+                                </div>
+                                <br></br>
                             </div>
+                            <button type="button">Edit Team</button>
+                            <button type="button">Delete Team</button>
                         </div>
-                        ))}
-                    </div>
+                    ))}
                 </section>
             </div>}
         </div>

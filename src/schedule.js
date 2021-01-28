@@ -13,11 +13,12 @@ export default function schedule() {
                 </div>
             </section>
             <section>
-                <h2>New user cannot see this page</h2>
+                <h2>Only captains and admins can see this page</h2>
                 <h2>Needs to be worked on!</h2>
                 <h2>Availability</h2>
                 <form action="setAvailability" className="border">
                     <p>What day are you looking to play?</p>
+                    {/* Will check days for all players available */}
                     <select>
                         <option>Sunday</option>
                         <option>Monday</option>
@@ -32,6 +33,10 @@ export default function schedule() {
                     <p></p>
                 </form>
             </section>
+
+            {/* Will change this section acording to what I need scheduling wise... Only captains can schedule games and on click of
+            the button, will pass to future game database to show on home screen */}
+
             <section>
                 <h2>Official Games Available</h2>
                 <div className="border">

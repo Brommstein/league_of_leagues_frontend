@@ -94,7 +94,7 @@ const CreateTeam = () => {
 
             console.table(response);
 
-            //window.location = "/teams";
+            window.location = "/teams";
 
         } catch (err) {
             console.error(err.message);
