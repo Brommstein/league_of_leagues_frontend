@@ -16,10 +16,10 @@ export default function homePage() {
                     <Route exact path="/">
                         <nav>
                             <div className="flexBox">
-                                <Link to="/teams" className="flex">Teams</Link>
-                                <Link to="/schedule" className="flex">Schedules</Link>
-                                <Link to="/accountEdit" className="flex">Account</Link>
-                                <Link to="/login" className="flex">Login</Link>
+                                <Link to="/teams" className="navFlex">Teams</Link>
+                                <Link to="/schedule" className="navFlex">Schedules</Link>
+                                <Link to="/accountEdit" className="navFlex">Account</Link>
+                                <Link to="/login" className="navFlex">Login</Link>
                             </div>
                         </nav>
                         <h2>Needs to be worked on!</h2>

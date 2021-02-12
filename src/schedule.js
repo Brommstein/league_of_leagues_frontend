@@ -4,14 +4,14 @@ import { Link } from 'react-router-dom';
 export default function schedule() {
     return (
         <div>
-            <section>
+            <nav>
                 <div className="flexBox">
-                    <Link to="/" className="flex">Back</Link>
-                    <p className="flex"></p>
-                    <p className="flex"></p>
-                    <Link to="/" className="flex">Logout</Link>
+                    <Link to="/" className="navFlex">Back</Link>
+                    <p className="navFlex"></p>
+                    <p className="navFlex"></p>
+                    <Link to="/" className="navFlex">Logout</Link>
                 </div>
-            </section>
+            </nav>
             <section>
                 <h2>Only captains and admins can see this page</h2>
                 <h2>Needs to be worked on!</h2>

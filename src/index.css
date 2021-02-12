@@ -5,6 +5,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  text-align: center;
+  width: 100%;
 }
 
 code {
@@ -12,8 +15,25 @@ code {
     monospace;
 }
 
-body {
-  text-align: center;
+header {
+  background-color: rgb(120, 120, 221);
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+nav {
+  background-color: rgb(179, 179, 179);
+}
+
+footer {
+  background-color: black;
+  color: white;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+button {
+  margin: 5px;
 }
 
 .flexBox {
@@ -28,8 +48,15 @@ body {
   min-height: 105px;
 }
 
+.navFlex {
+  flex: 1;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
 .border {
   border: solid 1px black;
   padding: 10px;
   margin: 20px;
+  border-radius: 30px;
 }

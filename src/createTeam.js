@@ -92,7 +92,55 @@ const CreateTeam = () => {
                 body: JSON.stringify(body)
             });
 
-            console.table(response);
+            const updatebody = {
+                status: 'Captain'
+            }
+
+            // eslint-disable-next-line no-unused-vars
+            const update = await fetch(`http://localhost:5000/accountstatus/${captainid}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(updatebody)
+            });
+
+            const teambody = {
+                team: teamAbr
+            }
+
+            // eslint-disable-next-line no-unused-vars
+            const teamTop = await fetch(`http://localhost:5000/teamupdate/${topid}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(teambody)
+            })
+
+            // eslint-disable-next-line no-unused-vars
+            const teamJungle = await fetch(`http://localhost:5000/teamupdate/${jungleid}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(teambody)
+            })
+
+            // eslint-disable-next-line no-unused-vars
+            const teamMid = await fetch(`http://localhost:5000/teamupdate/${midid}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(teambody)
+            })
+
+            // eslint-disable-next-line no-unused-vars
+            const teamADC = await fetch(`http://localhost:5000/teamupdate/${adcid}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(teambody)
+            })
+
+            // eslint-disable-next-line no-unused-vars
+            const teamSupport = await fetch(`http://localhost:5000/teamupdate/${supportid}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(teambody)
+            })
 
             window.location = "/teams";
 

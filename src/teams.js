@@ -38,19 +38,19 @@ const Teams = () => {
         <div>
             {isLoading && <div>Page is loading</div>}
             {!isLoading && <div>
-                <section>
+                <nav>
                     <div className="flexBox">
-                        <Link to="/" className="flex">Home</Link>
-                        <Link to="/createTeam" className="flex">Create a Team</Link>
-                        <Link to="/members" className="flex">League Members</Link>
-                        <Link to="/" className="flex">Logout</Link>
+                        <Link to="/" className="navFlex">Home</Link>
+                        <Link to="/createTeam" className="navFlex">Create a Team</Link>
+                        <Link to="/members" className="navFlex">League Members</Link>
+                        <Link to="/" className="navFlex">Logout</Link>
                     </div>
-                </section>
+                </nav>
                 <section>
                     <h2>Current Teams</h2>
                     {allTeams.map(allTeams => (
-                        <div className="border">
-                            <div key={allTeams.teamid} className="flexBox">
+                        <div key={allTeams.teamid} className="border">
+                            <div className="flexBox">
                                 <div className="flex">
                                     <h2>{allTeams.teamabr}</h2>
                                     <h3>{allTeams.teamname}</h3>

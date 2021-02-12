@@ -71,18 +71,16 @@ const AccountEdit = () => {
             <label htmlFor="editAccount"><h2>Edit Account</h2></label>
             <form name="editAccount" onSubmit={onSubmit}>
 
-                {/*
+                <label htmlFor="leagueName">What is your new name on League of Legends? </label>
+                <input type="text" value={leagueName} onChange={e => setLeagueName(e.target.value)}></input>
+                <p></p>
+                {/* 
                 <label htmlFor="newPassword">New Password: </label>
                 <input></input>
                 <p></p>
                 */}
-
-                <label htmlFor="leagueName">What is your new name on League of Legends? </label>
-                <input type="text" value={leagueName} onChange={e => setLeagueName(e.target.value)}></input>
-                <p></p>
                 <label htmlFor="preferedRole">What is your prefered role? </label>
                 <select name="preferedRole" id="preferedRole">
-                    <option value=""></option>
                     <option value="top">Top</option>
                     <option value="jungle">Jungle</option>
                     <option value="mid">Mid</option>

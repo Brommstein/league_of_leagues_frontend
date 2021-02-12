@@ -17,6 +17,16 @@ const CreateAccount = () => {
         e.preventDefault();
 
         //Check passwords match
+        if (password !== retype){
+            alert('The passwords do not match!');
+            return;
+        }
+
+        //Check password length
+        if (password.length < 8 || password.length > 18){
+            alert('Password must be 8 characters minimum or 18 characters maximum!')
+            return;
+        }
 
         //set body values
         const preferedRole = document.getElementById('preferedRole').value;
@@ -30,6 +40,8 @@ const CreateAccount = () => {
         let thursday = false;
         let friday = false;
         let saturday = false;
+        let status = 'User';
+        const team = 'Freelance';
 
         for (let i = 0; i < boxesChecked.length; i++) {
             availability.push(boxesChecked[i].value);
@@ -58,7 +70,8 @@ const CreateAccount = () => {
                 wednesday: wednesday,
                 thursday: thursday,
                 friday: friday,
-                saturday: saturday
+                saturday: saturday,
+                team: team
             };
 
             // eslint-disable-next-line no-unused-vars
@@ -78,17 +91,18 @@ const CreateAccount = () => {
             const accountBody = {
                 userid: userid,
                 username: userName,
-                password: password
+                password: password,
+                status: status
             }
 
             // eslint-disable-next-line no-unused-vars
-            const accountResponse = await fetch("http://localhost:5000/accounts", {
+            const accountResponse = await fetch("http://localhost:5000/accountstatus", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(accountBody)
             })
 
-            //window.location = "/";
+            window.location = "/";
 
         } catch (err) {
             console.error(err.message);
@@ -99,8 +113,6 @@ const CreateAccount = () => {
         <div className="border">
             <label htmlFor="createAccount"><h2>Create an Account</h2></label>
             <form name="createAccount" onSubmit={onSubmit}>
-
-                
                 <label htmlFor="username">Username: </label>
                 <input type="text" id="username" value={userName} onChange={e => setUserName(e.target.value)} required></input>
                 <p></p>
