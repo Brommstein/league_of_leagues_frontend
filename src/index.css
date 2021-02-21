@@ -32,6 +32,21 @@ footer {
   padding-bottom: 30px;
 }
 
+.TeamAbrLabel {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.TeamNameLabel {
+  font-size: 1.17em;
+  font-weight: bold;
+}
+
+.CaptainLabel {
+  font-weight: bold;
+}
+
+
 button {
   margin: 5px;
 }

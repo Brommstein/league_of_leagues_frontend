@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import Option from './components/option';
 
 const CreateTeam = () => {
 
@@ -11,6 +12,7 @@ const CreateTeam = () => {
     const [supportPlayers, setSupportPlayer] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false);
+    const [userStatus, setUserStatus] = useState('');
 
     const playerListCreation = () => {
 
@@ -142,83 +144,97 @@ const CreateTeam = () => {
                 body: JSON.stringify(teambody)
             })
 
-            window.location = "/teams";
+            window.location = "/";
 
         } catch (err) {
             console.error(err.message);
         }
-    }
+    };
+
+    //check auth token if available
+    const bootup = async () => {
+        if (window.sessionStorage.getItem('x-auth-token')) {
+            const x_auth_token = window.sessionStorage.getItem('x-auth-token');
+            await fetch('http://localhost:5000/decode', {
+                headers: { "x-auth-token": x_auth_token }
+            }).then(res => res.json()).then(response => setUserStatus(response.status));
+        }
+    };
 
     useEffect(() => {
         playerListCreation();
+        bootup();
     })
 
     return (
         <div>
-            {isLoading && <div>Page is loading</div>}
-            {!isLoading && <div>
-                <h2>New user cannot see this page</h2>
-                <h2>Needs to be worked on!</h2>
-                <form className="border" onSubmit={onSubmit}>
-                    <section>
-                        <label htmlFor="teamName">What is your team's name?</label>
-                        <input type="text" id="teamName"></input>
-                        <p></p>
-                        <label htmlFor="teamAbr">What is your team's abreviation</label>
-                        <input type="text" id="teamAbr"></input>
-                        <p></p>
-                        <label htmlFor="captain">Who is the team leader? </label>
-                        <select name="captain" id="captain">
-                            <option key="" userid="" value=""></option>
-                            {allUsers.map(allUsers => (
-                                <option key={allUsers.userid} uid={allUsers.userid} id={allUsers.leaguename} value={allUsers.leaguename}>{allUsers.leaguename}</option>
-                            ))}
-                        </select>
-                        <p></p>
-                        <label htmlFor="topLaner">Who is your top laner? </label>
-                        <select name="top" id="topLaner">
-                            <option value=""></option>
-                            {topPlayers.map(topPlayers => (
-                                <option key={topPlayers.userid} uid={topPlayers.userid} id={topPlayers.leaguename} value={topPlayers.leaguename}>{topPlayers.leaguename}</option>
-                            ))}
-                        </select>
-                        <p></p>
-                        <label htmlFor="jungler">Who is your jungler? </label>
-                        <select name="jungle" id="jungler">
-                            <option value=""></option>
-                            {junglePlayers.map(junglePlayers => (
-                                <option key={junglePlayers.userid} uid={junglePlayers.userid} id={junglePlayers.leaguename} value={junglePlayers.leaguename}>{junglePlayers.leaguename}</option>
-                            ))}
-                        </select>
-                        <p></p>
-                        <label htmlFor="midLaner">Who is your mid laner? </label>
-                        <select name="mid" id="midLaner">
-                            <option value=""></option>
-                            {midPlayers.map(midPlayers => (
-                                <option key={midPlayers.userid} uid={midPlayers.userid} id={midPlayers.leaguename} value={midPlayers.leaguename}>{midPlayers.leaguename}</option>
-                            ))}
-                        </select>
-                        <p></p>
-                        <label htmlFor="adcLaner">Who is your adc? </label>
-                        <select name="adc" id="adcLaner">
-                            <option value=""></option>
-                            {adcPlayers.map(adcPlayers => (
-                                <option key={adcPlayers.userid} uid={adcPlayers.userid} id={adcPlayers.leaguename} value={adcPlayers.leaguename}>{adcPlayers.leaguename}</option>
-                            ))}
-                        </select>
-                        <p></p>
-                        <label htmlFor="supportLaner">Who is your support? </label>
-                        <select name="support" id="supportLaner">
-                            <option value=""></option>
-                            {supportPlayers.map(supportPlayers => (
-                                <option key={supportPlayers.userid} uid={supportPlayers.userid} id={supportPlayers.leaguename} value={supportPlayers.leaguename}>{supportPlayers.leaguename}</option>
-                            ))}
-                        </select>
-                        <p></p>
-                        <input type="submit"></input>
-                        <Link to="/teams">Cancel</Link>
-                    </section>
-                </form>
+            {!userStatus && <h2>Not Authorized</h2>}
+            {!userStatus && <Link to="/">Home</Link>}
+            {userStatus && <div>
+                {isLoading && <div>Page is loading</div>}
+                {!isLoading && <div>
+                    <h2>Just need to work on design</h2>
+                    <form className="border" onSubmit={onSubmit}>
+                        <section>
+                            <label htmlFor="teamName">What is your team's name?</label>
+                            <input type="text" id="teamName"></input>
+                            <p></p>
+                            <label htmlFor="teamAbr">What is your team's abreviation</label>
+                            <input type="text" id="teamAbr"></input>
+                            <p></p>
+                            <label htmlFor="captain">Who is the team leader? </label>
+                            <select name="captain" id="captain">
+                                <option key="" userid="" value=""></option>
+                                {allUsers.map(allUsers => (
+                                    <Option key={allUsers.userid} allUsers={allUsers} />
+                                ))}
+                            </select>
+                            <p></p>
+                            <label htmlFor="topLaner">Who is your top laner? </label>
+                            <select name="top" id="topLaner">
+                                <option value=""></option>
+                                {topPlayers.map(topPlayers => (
+                                    <Option key={topPlayers.userid} allUsers={topPlayers} />
+                                ))}
+                            </select>
+                            <p></p>
+                            <label htmlFor="jungler">Who is your jungler? </label>
+                            <select name="jungle" id="jungler">
+                                <option value=""></option>
+                                {junglePlayers.map(junglePlayers => (
+                                    <Option key={junglePlayers.userid} allUsers={junglePlayers} />
+                                ))}
+                            </select>
+                            <p></p>
+                            <label htmlFor="midLaner">Who is your mid laner? </label>
+                            <select name="mid" id="midLaner">
+                                <option value=""></option>
+                                {midPlayers.map(midPlayers => (
+                                    <Option key={midPlayers.userid} allUsers={midPlayers} />
+                                ))}
+                            </select>
+                            <p></p>
+                            <label htmlFor="adcLaner">Who is your adc? </label>
+                            <select name="adc" id="adcLaner">
+                                <option value=""></option>
+                                {adcPlayers.map(adcPlayers => (
+                                    <Option key={adcPlayers.userid} allUsers={adcPlayers} />
+                                ))}
+                            </select>
+                            <p></p>
+                            <label htmlFor="supportLaner">Who is your support? </label>
+                            <select name="support" id="supportLaner">
+                                <option value=""></option>
+                                {supportPlayers.map(supportPlayers => (
+                                    <Option key={supportPlayers.userid} allUsers={supportPlayers} />
+                                ))}
+                            </select>
+                            <p></p>
+                            <button type="submit">Submit</button>
+                            <Link to="/">Cancel</Link>
+                        </section>
+                    </form>
+                </div>}
             </div>}
         </div>
     )

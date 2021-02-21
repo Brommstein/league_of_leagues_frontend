@@ -1,7 +1,7 @@
 import React from 'react';
-import HomePage from './homePage';
-import Header from './header';
-import Footer from './footer';
+import Routes from './Routes';
+import Header from './components/header';
+import Footer from './components/footer';
 
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
       <header>
         <Header />
       </header>
-      <HomePage />
+      <Routes />
       <footer>
         <Footer />
       </footer>

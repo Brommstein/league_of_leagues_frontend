@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-
-//To Do!
-/*
-    Connect teams api to show team/freelance on players
-    If user logged in then keeep logout but if new user set to login
-
-*/
+import Players from './components/player';
+import Log from './components/logstat';
 
 const Members = () => {
 
@@ -17,6 +12,7 @@ const Members = () => {
     const [supportPlayers, setSupportPlayer] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false);
+    const [userStatus, setUserStatus] = useState('');
 
     const playerListCreation = () => {
 
@@ -48,8 +44,19 @@ const Members = () => {
         setIsLoading(false);
     }
 
+    //check auth token if available
+    const bootup = async () => {
+        if (window.sessionStorage.getItem('x-auth-token')) {
+            const x_auth_token = window.sessionStorage.getItem('x-auth-token');
+            await fetch('http://localhost:5000/decode', {
+                headers: { "x-auth-token": x_auth_token }
+            }).then(res => res.json()).then(response => setUserStatus(response.status));
+        }
+    };
+
     useEffect(() => {
         playerListCreation();
+        bootup();
     })
 
 
@@ -59,96 +66,59 @@ const Members = () => {
             {!isLoading && <div>
                 <nav>
                     <div className="flexBox">
-                        <Link to="/teams" className="navFlex">Back</Link>
+                        <Link to="/" className="navFlex">Back</Link>
                         <p className="navFlex"></p>
                         <p className="navFlex"></p>
-                        <Link to="/" className="navFlex">Logout</Link>
+                        <Log userStatus={userStatus} />
                     </div>
                 </nav>
 
                 <section>
-                <h2>Needs to be worked on! (Design)</h2>
+                    <h2>Needs to be worked on! (Design, and modifying team data)</h2>
                     {topPlayers.length > 0 && <h3>Top Laners</h3>}
                     <div className="flexBox">
                         {topPlayers.map(topPlayers => (
-                            <div key={topPlayers.userid}>
-                                <div className="flex border">
-                                    <h4>{topPlayers.leaguename}</h4>
-                                    <p>{topPlayers.userid}</p>
-                                    <h4>Team: {topPlayers.team}</h4>
-                                    <p>Primary role: {topPlayers.preferedrole}</p>
-                                    {topPlayers.secondaryrole && <p>Secondary role: {topPlayers.secondaryrole}</p>}
-                                    <button>Delete</button>
-                                </div>
-                            </div>
+                            <Players key={topPlayers.leaguename} players={topPlayers} userStatus={userStatus} />
                         ))}
                     </div>
                 </section>
                 <br />
 
                 <section>
-                {junglePlayers.length > 0 && <h3>Junglers</h3>}
+                    {junglePlayers.length > 0 && <h3>Junglers</h3>}
                     <div className="flexBox">
                         {junglePlayers.map(junglePlayers => (
-                            <div key={junglePlayers.userid}>
-                                <div className="flex border">
-                                    <h4>{junglePlayers.leaguename}</h4>
-                                    <h4>Team: {junglePlayers.team}</h4>
-                                    <p>Primary role: {junglePlayers.preferedrole}</p>
-                                    {junglePlayers.secondaryrole && <p>Secondary role: {junglePlayers.secondaryrole}</p>}
-                                </div>
-                            </div>
+                            <Players key={junglePlayers.leaguename} players={junglePlayers} userStatus={userStatus} />
                         ))}
                     </div>
                 </section>
                 <br />
 
                 <section>
-                {midPlayers.length > 0 && <h3>Mid Laners</h3>}
+                    {midPlayers.length > 0 && <h3>Mid Laners</h3>}
                     <div className="flexBox">
                         {midPlayers.map(midPlayers => (
-                            <div key={midPlayers.userid}>
-                                <div className="flex border">
-                                    <h4>{midPlayers.leaguename}</h4>
-                                    <h4>Team: {midPlayers.team}</h4>
-                                    <p>Primary role: {midPlayers.preferedrole}</p>
-                                    {midPlayers.secondaryrole && <p>Secondary role: {midPlayers.secondaryrole}</p>}
-                                </div>
-                            </div>
+                            <Players key={midPlayers.leaguename} players={midPlayers} userStatus={userStatus} />
                         ))}
                     </div>
                 </section>
                 <br />
 
                 <section>
-                {adcPlayers.length > 0 && <h3>ADCs</h3>}
+                    {adcPlayers.length > 0 && <h3>ADCs</h3>}
                     <div className="flexBox">
                         {adcPlayers.map(adcPlayers => (
-                            <div key={adcPlayers.userid}>
-                                <div className="flex border">
-                                    <h4>{adcPlayers.leaguename}</h4>
-                                    <h4>Team: {adcPlayers.team}</h4>
-                                    <p>Primary role: {adcPlayers.preferedrole}</p>
-                                    {adcPlayers.secondaryrole && <p>Secondary role: {adcPlayers.secondaryrole}</p>}
-                                </div>
-                            </div>
+                            <Players key={adcPlayers.leaguename} players={adcPlayers} userStatus={userStatus} />
                         ))}
                     </div>
                 </section>
                 <br />
 
                 <section>
-                {supportPlayers.length > 0 && <h3>Supports</h3>}
+                    {supportPlayers.length > 0 && <h3>Supports</h3>}
                     <div className="flexBox">
                         {supportPlayers.map(supportPlayers => (
-                            <div key={supportPlayers.userid}>
-                                <div className="flex border">
-                                    <h4>{supportPlayers.leaguename}</h4>
-                                    <h4>Team: {supportPlayers.team}</h4>
-                                    <p>Primary role: {supportPlayers.preferedrole}</p>
-                                    {supportPlayers.secondaryrole && <p>Secondary role: {supportPlayers.secondaryrole}</p>}
-                                </div>
-                            </div>
+                            <Players key={supportPlayers.leaguename} players={supportPlayers} userStatus={userStatus} />
                         ))}
                     </div>
                 </section>

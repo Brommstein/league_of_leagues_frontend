@@ -17,13 +17,13 @@ const CreateAccount = () => {
         e.preventDefault();
 
         //Check passwords match
-        if (password !== retype){
+        if (password !== retype) {
             alert('The passwords do not match!');
             return;
         }
 
         //Check password length
-        if (password.length < 8 || password.length > 18){
+        if (password.length < 8 || password.length > 18) {
             alert('Password must be 8 characters minimum or 18 characters maximum!')
             return;
         }
@@ -84,8 +84,8 @@ const CreateAccount = () => {
             const userid = await fetch('http://localhost:5000/users', {
                 method: "GET"
             })
-            .then(userResponse => userResponse.json())
-            .then(uResponse => uResponse.pop().userid);
+                .then(userResponse => userResponse.json())
+                .then(uResponse => uResponse.pop().userid);
 
             //body for /accounts db
             const accountBody = {
@@ -100,6 +100,8 @@ const CreateAccount = () => {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(accountBody)
+            }).then(result => {
+                window.sessionStorage.setItem('x-auth-token', result.token);
             })
 
             window.location = "/";
