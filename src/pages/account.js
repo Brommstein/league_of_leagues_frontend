@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import URI from '../constance/URI';
 
 //NEED TO CONNECT USER ID TO PAGE FOR PAGE TO WORK VIA USER AUTH
 
@@ -54,7 +55,7 @@ const AccountEdit = () => {
             };
 
             // eslint-disable-next-line no-unused-vars
-            const response = await fetch(`http://localhost:5000/users/${userid}`, {
+            const response = await fetch(`${URI}/users/${userid}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(body)
@@ -71,7 +72,7 @@ const AccountEdit = () => {
     const bootup = async () => {
         if (window.sessionStorage.getItem('x-auth-token')) {
             const x_auth_token = window.sessionStorage.getItem('x-auth-token');
-            await fetch('http://localhost:5000/decode', {
+            await fetch(`${URI}/decode`, {
                 headers: { "x-auth-token": x_auth_token }
             }).then(res => res.json()).then(response => {
                 setUserStatus(response.status);

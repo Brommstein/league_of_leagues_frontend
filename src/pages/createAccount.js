@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import URI from '../constance/URI';
 
 //CREATE USER AUTH TO CONNECT TO OTHER PAGES
 
@@ -75,13 +76,13 @@ const CreateAccount = () => {
             };
 
             // eslint-disable-next-line no-unused-vars
-            const usersResponse = await fetch("http://localhost:5000/users", {
+            const usersResponse = await fetch(`${URI}/users`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(userBody)
             });
 
-            const userid = await fetch('http://localhost:5000/users', {
+            const userid = await fetch(`${URI}/users`, {
                 method: "GET"
             })
                 .then(userResponse => userResponse.json())
@@ -96,7 +97,7 @@ const CreateAccount = () => {
             }
 
             // eslint-disable-next-line no-unused-vars
-            const accountResponse = await fetch("http://localhost:5000/accountstatus", {
+            const accountResponse = await fetch(`${URI}/accountstatus`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(accountBody)

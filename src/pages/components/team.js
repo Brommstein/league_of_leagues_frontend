@@ -1,5 +1,6 @@
 import React from 'react';
 import Option from './option';
+import URI from '../../constance/URI';
 
 export default class team extends React.Component {
     constructor(props) {
@@ -40,7 +41,7 @@ export default class team extends React.Component {
     }
 
     setCaptain(e) {
-        fetch(`http://localhost:5000/accountstatus/${this.state.captainid}`, {
+        fetch(`${URI}/accountstatus/${this.state.captainid}`, {
             method: 'PUT',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ status: 'User' })
@@ -49,7 +50,7 @@ export default class team extends React.Component {
         const captain = document.getElementById('captain').value;
         const captainid = document.getElementById(captain).getAttribute('uid');
         this.setState({ captainid: captainid });
-        fetch(`http://localhost:5000/accountstatus/${this.state.captainid}`, {
+        fetch(`${URI}/accountstatus/${this.state.captainid}`, {
             method: 'PUT',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ status: 'Captain' })
@@ -92,7 +93,7 @@ export default class team extends React.Component {
     }
 
     deleteTeam() {
-        fetch(`http://localhost:5000/teams/${this.props.allTeams.teamid}`, {
+        fetch(`${URI}/teams/${this.props.allTeams.teamid}`, {
             method: 'DELETE'
         });
         window.location = '/';
@@ -122,7 +123,7 @@ export default class team extends React.Component {
             support: this.state.support
         };
 
-        fetch(`http://localhost:5000/teams/${this.props.allTeams.teamid}`, {
+        fetch(`${URI}/teams/${this.props.allTeams.teamid}`, {
             method: 'PUT',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(body)

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Team from './components/team';
 import Log from './components/logstat';
+import URI from '../constance/URI';
 
 
 const Home = () => {
@@ -24,7 +25,7 @@ const Home = () => {
         setIsLoading(true);
 
         if (!isLoaded) {
-            fetch('http://localhost:5000/teams')
+            fetch(`${URI}/teams`)
                 .then(teamsResponse => teamsResponse.json())
                 .then(
                     teams => {
@@ -35,7 +36,7 @@ const Home = () => {
                     }
                 );
 
-            fetch('http://localhost:5000/users')
+            fetch(`${URI}/users`)
                 .then(usersResponse => usersResponse.json())
                 .then(
                     users => {
@@ -68,7 +69,7 @@ const Home = () => {
     const bootup = async () => {
         if (window.sessionStorage.getItem('x-auth-token')) {
             const x_auth_token = window.sessionStorage.getItem('x-auth-token');
-            await fetch('http://localhost:5000/decode', {
+            await fetch(`${URI}/decode`, {
                 headers: { "x-auth-token": x_auth_token }
             }).then(res => res.json()).then(response => setUserStatus(response.status));
         }

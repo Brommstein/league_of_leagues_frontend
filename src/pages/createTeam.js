@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Option from './components/option';
+import URI from '../constance/URI';
 
 const CreateTeam = () => {
 
@@ -19,7 +20,7 @@ const CreateTeam = () => {
         setIsLoading(true);
 
         if (!isLoaded) {
-            fetch('http://localhost:5000/users')
+            fetch(`${URI}/users`)
                 .then(usersResponse => usersResponse.json())
                 .then(
                     users => {
@@ -88,7 +89,7 @@ const CreateTeam = () => {
             }
 
             // eslint-disable-next-line no-unused-vars
-            const response = await fetch('http://localhost:5000/teams', {
+            const response = await fetch(`${URI}/teams`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(body)
@@ -99,7 +100,7 @@ const CreateTeam = () => {
             }
 
             // eslint-disable-next-line no-unused-vars
-            const update = await fetch(`http://localhost:5000/accountstatus/${captainid}`, {
+            const update = await fetch(`${URI}/accountstatus/${captainid}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(updatebody)
@@ -110,35 +111,35 @@ const CreateTeam = () => {
             }
 
             // eslint-disable-next-line no-unused-vars
-            const teamTop = await fetch(`http://localhost:5000/teamupdate/${topid}`, {
+            const teamTop = await fetch(`${URI}/teamupdate/${topid}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(teambody)
             })
 
             // eslint-disable-next-line no-unused-vars
-            const teamJungle = await fetch(`http://localhost:5000/teamupdate/${jungleid}`, {
+            const teamJungle = await fetch(`${URI}/teamupdate/${jungleid}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(teambody)
             })
 
             // eslint-disable-next-line no-unused-vars
-            const teamMid = await fetch(`http://localhost:5000/teamupdate/${midid}`, {
+            const teamMid = await fetch(`${URI}/teamupdate/${midid}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(teambody)
             })
 
             // eslint-disable-next-line no-unused-vars
-            const teamADC = await fetch(`http://localhost:5000/teamupdate/${adcid}`, {
+            const teamADC = await fetch(`${URI}/teamupdate/${adcid}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(teambody)
             })
 
             // eslint-disable-next-line no-unused-vars
-            const teamSupport = await fetch(`http://localhost:5000/teamupdate/${supportid}`, {
+            const teamSupport = await fetch(`${URI}/teamupdate/${supportid}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(teambody)
@@ -155,7 +156,7 @@ const CreateTeam = () => {
     const bootup = async () => {
         if (window.sessionStorage.getItem('x-auth-token')) {
             const x_auth_token = window.sessionStorage.getItem('x-auth-token');
-            await fetch('http://localhost:5000/decode', {
+            await fetch(`${URI}/decode`, {
                 headers: { "x-auth-token": x_auth_token }
             }).then(res => res.json()).then(response => setUserStatus(response.status));
         }

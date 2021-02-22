@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import URI from '../constance/URI';
 
 const LoginForm = () => {
 
@@ -18,7 +19,7 @@ const LoginForm = () => {
         }
 
         // eslint-disable-next-line no-unused-vars
-        const login = await fetch('http://localhost:5000/auth', {
+        const login = await fetch(`${URI}/auth`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(body)
@@ -33,7 +34,7 @@ const LoginForm = () => {
     const bootup = async () => {
         if (window.sessionStorage.getItem('x-auth-token')) {
             const x_auth_token = window.sessionStorage.getItem('x-auth-token');
-            await fetch('http://localhost:5000/decode', {
+            await fetch(`${URI}/decode`, {
                 headers: { "x-auth-token": x_auth_token }
             }).then(res => res.json()).then(response => {
                 setUserStatus(response.status);

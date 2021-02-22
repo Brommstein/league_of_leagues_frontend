@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Players from './components/player';
 import Log from './components/logstat';
+import URI from '../constance/URI';
 
 const Members = () => {
 
@@ -19,7 +20,7 @@ const Members = () => {
         setIsLoading(true);
 
         if (!isLoaded) {
-            fetch('http://localhost:5000/users')
+            fetch(`${URI}/users`)
                 .then(usersResponse => usersResponse.json())
                 .then(
                     users => {
@@ -48,7 +49,7 @@ const Members = () => {
     const bootup = async () => {
         if (window.sessionStorage.getItem('x-auth-token')) {
             const x_auth_token = window.sessionStorage.getItem('x-auth-token');
-            await fetch('http://localhost:5000/decode', {
+            await fetch(`${URI}/decode`, {
                 headers: { "x-auth-token": x_auth_token }
             }).then(res => res.json()).then(response => setUserStatus(response.status));
         }

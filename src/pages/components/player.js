@@ -1,13 +1,14 @@
 import React from 'react';
+import URI from '../../constance/URI';
 
 export default class player extends React.Component {
 
     deletePlayer() {
         console.log(this.props.players.leaguename);
-        fetch(`http://localhost:5000/users/${this.props.players.userid}`, {
+        fetch(`${URI}/users/${this.props.players.userid}`, {
             method: 'DELETE'
         });
-        fetch(`http://localhost:5000/accountstatus/${this.props.players.userid}`, {
+        fetch(`${URI}/accountstatus/${this.props.players.userid}`, {
             method: 'DELETE'
         });
         window.location = '/members';
