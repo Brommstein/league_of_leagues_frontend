@@ -84,8 +84,9 @@ const CreateAccount = () => {
 
             const userid = await fetch(`${URI}/users`)
                 .then(userResponse => userResponse.json())
-                .then(uResponse => console.log(uResponse.userid))
                 .then(uResponse => uResponse.pop().userid);
+
+            console.log(userid);
 
             //body for /accounts db
             const accountBody = {
