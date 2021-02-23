@@ -42,7 +42,7 @@ export default class team extends React.Component {
 
     setCaptain(e) {
         fetch(`${URI}/accountstatus/${this.state.captainid}`, {
-            method: 'PUT',
+            method: 'PATCH',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ status: 'User' })
         })
@@ -51,7 +51,7 @@ export default class team extends React.Component {
         const captainid = document.getElementById(captain).getAttribute('uid');
         this.setState({ captainid: captainid });
         fetch(`${URI}/accountstatus/${this.state.captainid}`, {
-            method: 'PUT',
+            method: 'PATCH',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ status: 'Captain' })
         })
@@ -124,7 +124,7 @@ export default class team extends React.Component {
         };
 
         fetch(`${URI}/teams/${this.props.allTeams.teamid}`, {
-            method: 'PUT',
+            method: 'PATCH',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(body)
         }).then(res => res.json()).then(res => console.log(res));

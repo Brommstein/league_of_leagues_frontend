@@ -80,12 +80,11 @@ const CreateAccount = () => {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(userBody)
-            });
+            }).then(res => res.json()).then(res => console.log(res));
 
-            const userid = await fetch(`${URI}/users`, {
-                method: "GET"
-            })
+            const userid = await fetch(`${URI}/users`)
                 .then(userResponse => userResponse.json())
+                .then(uResponse => console.log(uResponse.userid))
                 .then(uResponse => uResponse.pop().userid);
 
             //body for /accounts db

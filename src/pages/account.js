@@ -56,7 +56,7 @@ const AccountEdit = () => {
 
             // eslint-disable-next-line no-unused-vars
             const response = await fetch(`${URI}/users/${userid}`, {
-                method: "PUT",
+                method: "PATCH",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(body)
             });

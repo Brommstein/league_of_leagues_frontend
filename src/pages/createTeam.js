@@ -101,7 +101,7 @@ const CreateTeam = () => {
 
             // eslint-disable-next-line no-unused-vars
             const update = await fetch(`${URI}/accountstatus/${captainid}`, {
-                method: "PUT",
+                method: "PATCH",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(updatebody)
             });
@@ -112,35 +112,35 @@ const CreateTeam = () => {
 
             // eslint-disable-next-line no-unused-vars
             const teamTop = await fetch(`${URI}/teamupdate/${topid}`, {
-                method: "PUT",
+                method: "PATCH",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(teambody)
             })
 
             // eslint-disable-next-line no-unused-vars
             const teamJungle = await fetch(`${URI}/teamupdate/${jungleid}`, {
-                method: "PUT",
+                method: "PATCH",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(teambody)
             })
 
             // eslint-disable-next-line no-unused-vars
             const teamMid = await fetch(`${URI}/teamupdate/${midid}`, {
-                method: "PUT",
+                method: "PATCH",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(teambody)
             })
 
             // eslint-disable-next-line no-unused-vars
             const teamADC = await fetch(`${URI}/teamupdate/${adcid}`, {
-                method: "PUT",
+                method: "PATCH",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(teambody)
             })
 
             // eslint-disable-next-line no-unused-vars
             const teamSupport = await fetch(`${URI}/teamupdate/${supportid}`, {
-                method: "PUT",
+                method: "PATCH",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(teambody)
             })
