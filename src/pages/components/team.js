@@ -113,7 +113,7 @@ export default class team extends React.Component {
         await fetch(`${URI}/accountstatus/${this.state.captainid}`, {
             method: "PATCH",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ status: user })
+            body: JSON.stringify({ _status: user })
         });
         await fetch(`${URI}/users/teamupdate/${this.state.topid}`, {
             method: 'PATCH',
