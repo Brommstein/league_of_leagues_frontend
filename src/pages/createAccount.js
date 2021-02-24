@@ -110,7 +110,7 @@ const CreateAccount = () => {
                     if (result.message) setmessage(result.message);
                 })
 
-            //window.location = "/";
+            window.location = "/";
 
         } catch (err) {
             console.error(err.message);
