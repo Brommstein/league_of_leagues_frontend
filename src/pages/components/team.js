@@ -383,7 +383,7 @@ export default class team extends React.Component {
         if (friday >= 4) { day.push('Friday') };
         if (saturday >= 4) { day.push('Saturday') };
 
-        let bestDays = day.join(', ')
+        console.log(day.join(', '))
 
         return (
             <div className="border">
@@ -479,9 +479,8 @@ export default class team extends React.Component {
                     </div>
                     <br></br>
                 </div>}
-                <h4>Best day(s) to play: {bestDays}</h4>
+                <h4>Best day(s) to play: {day.join(', ')}</h4>
                 <p></p>
-
                 {this.state.update === true && <button type="submit" onClick={(e) => { this.submitUpdate(e) }}>Submit</button>}
                 {(this.state.update === false && (this.props.userStatus === 'Captain' || this.props.userStatus === 'Admin')) && <button type="button" onClick={() => { this.updateTeam() }}>Update Team</button>}
                 {this.state.update === true && <button type="button" onClick={(e) => { this.setState({ update: false }) }}>Cancel</button>}
