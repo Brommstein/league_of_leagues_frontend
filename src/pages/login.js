@@ -8,6 +8,7 @@ const LoginForm = () => {
     const [password, setPassword] = useState('');
     const [userStatus, setUserStatus] = useState('');
     const [usernamelogged, setUsernameLogged] = useState('');
+    const [message, setmessage] = useState('');
 
     const onSubmit = async (e) => {
 
@@ -24,21 +25,25 @@ const LoginForm = () => {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(body)
         }).then(res => res.json()).then(result => {
-            window.sessionStorage.setItem('x-auth-token', result.token);
+            if (result.token) {
+                window.sessionStorage.setItem('x-auth-token', result.token);
+                window.location = '/';
+            };
+            if (!result.token) {
+                setmessage(result.message);
+            }
         })
-
-        window.location = '/';
     };
 
     //check auth token if available
     const bootup = async () => {
         if (window.sessionStorage.getItem('x-auth-token')) {
             const x_auth_token = window.sessionStorage.getItem('x-auth-token');
-            await fetch(`${URI}/decode`, {
+            await fetch(`${URI}/auth/decode`, {
                 headers: { "x-auth-token": x_auth_token }
             }).then(res => res.json()).then(response => {
-                setUserStatus(response.status);
-                setUsernameLogged(response.name);
+                if (response.status) setUserStatus(response.status)
+                if (response.name) setUsernameLogged(response.name)
             });
         }
     };
@@ -57,6 +62,7 @@ const LoginForm = () => {
                     <label htmlFor="password">Password: </label>
                     <input type="password" id="password" value={password} onChange={e => setPassword(e.target.value)} required></input>
                     <p></p>
+                    <p className='redletter'>{message}</p>
                     <button type="submit">Login</button>
                     <Link to="/">Cancel</Link>
                     <p>Or</p>

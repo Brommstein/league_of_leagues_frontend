@@ -4,7 +4,6 @@ import URI from '../../constance/URI';
 export default class player extends React.Component {
 
     deletePlayer() {
-        console.log(this.props.players.leaguename);
         fetch(`${URI}/users/${this.props.players.userid}`, {
             method: 'DELETE'
         });

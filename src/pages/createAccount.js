@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import URI from '../constance/URI';
-
-//CREATE USER AUTH TO CONNECT TO OTHER PAGES
 
 const CreateAccount = () => {
 
@@ -11,6 +9,9 @@ const CreateAccount = () => {
     const [password, setPassword] = useState('');
     const [retype, setRetype] = useState('');
     const [leagueName, setLeagueName] = useState("");
+    const [message, setmessage] = useState('');
+    const [userStatus, setUserStatus] = useState('');
+    const [usernamelogged, setUsernameLogged] = useState('');
 
     //submit button
     const onSubmit = async (e) => {
@@ -19,13 +20,13 @@ const CreateAccount = () => {
 
         //Check passwords match
         if (password !== retype) {
-            alert('The passwords do not match!');
+            setmessage('The passwords do not match!');
             return;
         }
 
         //Check password length
         if (password.length < 8 || password.length > 18) {
-            alert('Password must be 8 characters minimum or 18 characters maximum!')
+            setmessage('Password must be 8 to 18 characters!');
             return;
         }
 
@@ -75,18 +76,15 @@ const CreateAccount = () => {
                 team: team
             };
 
-            // eslint-disable-next-line no-unused-vars
-            const usersResponse = await fetch(`${URI}/users`, {
+            await fetch(`${URI}/users`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(userBody)
-            }).then(res => res.json()).then(res => console.log(res));
+            })
 
             const userid = await fetch(`${URI}/users`)
                 .then(userResponse => userResponse.json())
                 .then(uResponse => uResponse.pop().userid);
-
-            console.log(userid);
 
             //body for /accounts db
             const accountBody = {
@@ -96,93 +94,117 @@ const CreateAccount = () => {
                 status: status
             }
 
-            // eslint-disable-next-line no-unused-vars
-            const accountResponse = await fetch(`${URI}/accountstatus`, {
+            await fetch(`${URI}/accountstatus`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(accountBody)
-            }).then(result => {
-                window.sessionStorage.setItem('x-auth-token', result.token);
             })
+                .then(result => result.json())
+                .then(result => {
+                    window.sessionStorage.setItem('x-auth-token', result.token);
+                })
 
-            window.location = "/";
+            //window.location = "/";
 
         } catch (err) {
             console.error(err.message);
         }
     }
 
+    //check auth token if available
+    const bootup = async () => {
+        if (window.sessionStorage.getItem('x-auth-token')) {
+            const x_auth_token = window.sessionStorage.getItem('x-auth-token');
+            await fetch(`${URI}/auth/decode`, {
+                headers: { "x-auth-token": x_auth_token }
+            }).then(res => res.json()).then(response => {
+                if (response.status) setUserStatus(response.status)
+                if (response.name) setUsernameLogged(response.name)
+            });
+        }
+    };
+
+    useEffect(() => {
+        bootup();
+    });
+
     return (
         <div className="border">
-            <label htmlFor="createAccount"><h2>Create an Account</h2></label>
-            <form name="createAccount" onSubmit={onSubmit}>
-                <label htmlFor="username">Username: </label>
-                <input type="text" id="username" value={userName} onChange={e => setUserName(e.target.value)} required></input>
-                <p></p>
-                <label htmlFor="password">Password: </label>
-                <input type="password" id="password" value={password} onChange={e => setPassword(e.target.value)} required></input>
-                <p></p>
-                <label htmlFor="retype">Retype the Password: </label>
-                <input type="password" id="retype" value={retype} onChange={e => setRetype(e.target.value)} required></input>
-                <p></p>
-                <label htmlFor="leagueName">What is your name on League of Legends? </label>
-                <input id="leagueName" type="text" value={leagueName} onChange={e => setLeagueName(e.target.value)} required></input>
-                <p></p>
-                <label htmlFor="preferedRole">What is your prefered role? </label>
-                <select name="preferedRole" id="preferedRole">
-                    <option value="top">Top</option>
-                    <option value="jungle">Jungle</option>
-                    <option value="mid">Mid</option>
-                    <option value="adc">ADC</option>
-                    <option value="support">Support</option>
-                </select>
-                <p></p>
-                <label htmlFor="secondaryRole">What is your secondary role? </label>
-                <select name="secondaryRole" id="secondaryRole">
-                    <option value=""></option>
-                    <option value="top">Top</option>
-                    <option value="jungle">Jungle</option>
-                    <option value="mid">Mid</option>
-                    <option value="adc">ADC</option>
-                    <option value="support">Support</option>
-                </select>
-                <p></p>
-                <div>
-                    <p>What day are you able to play?</p>
-                    <div className="flexBox" id="availability">
-                        <div className="flex">
-                            <input type="checkbox" id="sundayBox" value="sunday"></input>
-                            <label htmlFor="sundayBox">Sunday</label>
-                        </div>
-                        <div className="flex">
-                            <input type="checkbox" id="mondayBox" value="monday"></input>
-                            <label htmlFor="mondayBox">Monday</label>
-                        </div>
-                        <div className="flex">
-                            <input type="checkbox" id="tuesdayBox" value="tuesday"></input>
-                            <label htmlFor="tuesdayBox">Tuesday</label>
-                        </div>
-                        <div className="flex">
-                            <input type="checkbox" id="wednesdayBox" value="wednesday"></input>
-                            <label htmlFor="wednesdayBox">Wednesday</label>
-                        </div>
-                        <div className="flex">
-                            <input type="checkbox" id="thursdayBox" value="thursday"></input>
-                            <label htmlFor="thursdayBox">Thursday</label>
-                        </div>
-                        <div className="flex">
-                            <input type="checkbox" id="fridayBox" value="friday"></input>
-                            <label htmlFor="fridayBox">Friday</label>
-                        </div>
-                        <div className="flex">
-                            <input type="checkbox" id="saturdayBox" value="saturday"></input>
-                            <label htmlFor="saturdayBox">Saturday</label>
+            {!userStatus && <div>
+                <label htmlFor="createAccount"><h2>Create an Account</h2></label>
+                <form name="createAccount" onSubmit={onSubmit}>
+                    <label htmlFor="username">Username: </label>
+                    <input type="text" id="username" value={userName} onChange={e => setUserName(e.target.value)} required></input>
+                    <p></p>
+                    <label htmlFor="password">Password: </label>
+                    <input type="password" id="password" value={password} onChange={e => setPassword(e.target.value)} required></input>
+                    <p></p>
+                    <label htmlFor="retype">Retype the Password: </label>
+                    <input type="password" id="retype" value={retype} onChange={e => setRetype(e.target.value)} required></input>
+                    <p></p>
+                    <label htmlFor="leagueName">What is your name on League of Legends? </label>
+                    <input id="leagueName" type="text" value={leagueName} onChange={e => setLeagueName(e.target.value)} required></input>
+                    <p></p>
+                    <label htmlFor="preferedRole">What is your prefered role? </label>
+                    <select name="preferedRole" id="preferedRole">
+                        <option value="top">Top</option>
+                        <option value="jungle">Jungle</option>
+                        <option value="mid">Mid</option>
+                        <option value="adc">ADC</option>
+                        <option value="support">Support</option>
+                    </select>
+                    <p></p>
+                    <label htmlFor="secondaryRole">What is your secondary role? </label>
+                    <select name="secondaryRole" id="secondaryRole">
+                        <option value=""></option>
+                        <option value="top">Top</option>
+                        <option value="jungle">Jungle</option>
+                        <option value="mid">Mid</option>
+                        <option value="adc">ADC</option>
+                        <option value="support">Support</option>
+                    </select>
+                    <p></p>
+                    <div>
+                        <p>What day are you able to play?</p>
+                        <div className="flexBox" id="availability">
+                            <div className="flex">
+                                <input type="checkbox" id="sundayBox" value="sunday"></input>
+                                <label htmlFor="sundayBox">Sunday</label>
+                            </div>
+                            <div className="flex">
+                                <input type="checkbox" id="mondayBox" value="monday"></input>
+                                <label htmlFor="mondayBox">Monday</label>
+                            </div>
+                            <div className="flex">
+                                <input type="checkbox" id="tuesdayBox" value="tuesday"></input>
+                                <label htmlFor="tuesdayBox">Tuesday</label>
+                            </div>
+                            <div className="flex">
+                                <input type="checkbox" id="wednesdayBox" value="wednesday"></input>
+                                <label htmlFor="wednesdayBox">Wednesday</label>
+                            </div>
+                            <div className="flex">
+                                <input type="checkbox" id="thursdayBox" value="thursday"></input>
+                                <label htmlFor="thursdayBox">Thursday</label>
+                            </div>
+                            <div className="flex">
+                                <input type="checkbox" id="fridayBox" value="friday"></input>
+                                <label htmlFor="fridayBox">Friday</label>
+                            </div>
+                            <div className="flex">
+                                <input type="checkbox" id="saturdayBox" value="saturday"></input>
+                                <label htmlFor="saturdayBox">Saturday</label>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <button type="submit">Submit</button>
-                <Link to="/">Cancel</Link>
-            </form>
+                    <p className='redletter'>{message}</p>
+                    <button type="submit">Submit</button>
+                    <Link to="/">Cancel</Link>
+                </form>
+            </div>}
+
+            {userStatus && <h2>Logged in as {usernamelogged}</h2>}
+            {userStatus && <Link to="/">Home</Link>}
         </div>
     )
 }

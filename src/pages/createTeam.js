@@ -111,35 +111,35 @@ const CreateTeam = () => {
             }
 
             // eslint-disable-next-line no-unused-vars
-            const teamTop = await fetch(`${URI}/teamupdate/${topid}`, {
+            const teamTop = await fetch(`${URI}/users/teamupdate/${topid}`, {
                 method: "PATCH",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(teambody)
             })
 
             // eslint-disable-next-line no-unused-vars
-            const teamJungle = await fetch(`${URI}/teamupdate/${jungleid}`, {
+            const teamJungle = await fetch(`${URI}/users/teamupdate/${jungleid}`, {
                 method: "PATCH",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(teambody)
             })
 
             // eslint-disable-next-line no-unused-vars
-            const teamMid = await fetch(`${URI}/teamupdate/${midid}`, {
+            const teamMid = await fetch(`${URI}/users/teamupdate/${midid}`, {
                 method: "PATCH",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(teambody)
             })
 
             // eslint-disable-next-line no-unused-vars
-            const teamADC = await fetch(`${URI}/teamupdate/${adcid}`, {
+            const teamADC = await fetch(`${URI}/users/teamupdate/${adcid}`, {
                 method: "PATCH",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(teambody)
             })
 
             // eslint-disable-next-line no-unused-vars
-            const teamSupport = await fetch(`${URI}/teamupdate/${supportid}`, {
+            const teamSupport = await fetch(`${URI}/users/teamupdate/${supportid}`, {
                 method: "PATCH",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(teambody)
@@ -156,9 +156,11 @@ const CreateTeam = () => {
     const bootup = async () => {
         if (window.sessionStorage.getItem('x-auth-token')) {
             const x_auth_token = window.sessionStorage.getItem('x-auth-token');
-            await fetch(`${URI}/decode`, {
+            await fetch(`${URI}/auth/decode`, {
                 headers: { "x-auth-token": x_auth_token }
-            }).then(res => res.json()).then(response => setUserStatus(response.status));
+            }).then(res => res.json()).then(response => {
+                if (response.status) setUserStatus(response.status)
+            });
         }
     };
 

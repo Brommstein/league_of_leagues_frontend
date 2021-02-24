@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 import React from 'react';
 import Option from './option';
 import URI from '../../constance/URI';
@@ -7,19 +8,27 @@ export default class team extends React.Component {
         super(props);
         this.state = {
             update: this.props.update,
+            change: this.props.change,
+            allusers: this.props.allUsers,
             teamabr: this.props.allTeams.teamabr,
             teamname: this.props.allTeams.teamname,
             captainid: this.props.allTeams.captainid,
+            startcaptainid: '',
             captain: this.props.allTeams.captain,
             topid: this.props.allTeams.topid,
+            starttopid: '',
             top: this.props.allTeams.top,
             jungleid: this.props.allTeams.jungleid,
+            startjungleid: '',
             jungle: this.props.allTeams.jungle,
             midid: this.props.allTeams.midid,
+            startmidid: '',
             mid: this.props.allTeams.mid,
             adcid: this.props.allTeams.adcid,
+            startadcid: '',
             adc: this.props.allTeams.adc,
             supportid: this.props.allTeams.supportid,
+            startsupportid: '',
             support: this.props.allTeams.support
         }
         this.setTeamabr = this.setTeamabr.bind(this);
@@ -40,71 +49,206 @@ export default class team extends React.Component {
         this.setState({ teamname: e.target.value });
     }
 
-    setCaptain(e) {
-        fetch(`${URI}/accountstatus/${this.state.captainid}`, {
-            method: 'PATCH',
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ status: 'User' })
-        })
+    async setCaptain(e) {
         this.setState({ captain: e.target.value });
         const captain = document.getElementById('captain').value;
         const captainid = document.getElementById(captain).getAttribute('uid');
-        this.setState({ captainid: captainid });
-        fetch(`${URI}/accountstatus/${this.state.captainid}`, {
-            method: 'PATCH',
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ status: 'Captain' })
-        })
+        await this.setState({
+            captainid: captainid
+        });
     }
 
-    setTop(e) {
+    async setTop(e) {
         this.setState({ top: e.target.value });
         const top = document.getElementById('top').value;
         const topid = document.getElementById(top).getAttribute('uid');
-        this.setState({ topid: topid });
+        await this.setState({
+            topid: topid
+        });
     }
 
-    setJungle(e) {
+    async setJungle(e) {
         this.setState({ jungle: e.target.value });
         const jungle = document.getElementById('jungle').value;
         const jungleid = document.getElementById(jungle).getAttribute('uid');
-        this.setState({ jungleid: jungleid });
+        await this.setState({
+            jungleid: jungleid
+        });
     }
 
-    setMid(e) {
+    async setMid(e) {
         this.setState({ mid: e.target.value });
         const mid = document.getElementById('mid').value;
         const midid = document.getElementById(mid).getAttribute('uid');
-        this.setState({ midid: midid });
+        await this.setState({
+            midid: midid
+        });
     }
 
-    setADC(e) {
+    async setADC(e) {
         this.setState({ adc: e.target.value });
         const adc = document.getElementById('adc').value;
         const adcid = document.getElementById(adc).getAttribute('uid');
-        this.setState({ adcid: adcid });
+        await this.setState({
+            adcid: adcid
+        });
     }
 
-    setSupport(e) {
+    async setSupport(e) {
         this.setState({ support: e.target.value });
         const support = document.getElementById('support').value;
         const supportid = document.getElementById(support).getAttribute('uid');
-        this.setState({ supportid: supportid });
+        await this.setState({
+            supportid: supportid
+        });
     }
 
-    deleteTeam() {
-        fetch(`${URI}/teams/${this.props.allTeams.teamid}`, {
+    async deleteTeam() {
+        const user = 'User';
+        const freelance = 'Freelance';
+
+        await fetch(`${URI}/teams/${this.props.allTeams.teamid}`, {
             method: 'DELETE'
         });
+        await fetch(`${URI}/accountstatus/${this.state.captainid}`, {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ status: user })
+        });
+        await fetch(`${URI}/users/teamupdate/${this.state.topid}`, {
+            method: 'PATCH',
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ team: freelance })
+        });
+        await fetch(`${URI}/users/teamupdate/${this.state.jungleid}`, {
+            method: 'PATCH',
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ team: freelance })
+        });
+        await fetch(`${URI}/users/teamupdate/${this.state.midid}`, {
+            method: 'PATCH',
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ team: freelance })
+        });
+        await fetch(`${URI}/users/teamupdate/${this.state.adcid}`, {
+            method: 'PATCH',
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ team: freelance })
+        });
+        await fetch(`${URI}/users/teamupdate/${this.state.supportid}`, {
+            method: 'PATCH',
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ team: freelance })
+        });
+
         window.location = '/';
     }
 
-    updateTeam() {
-        this.setState({ update: true });
+    async updateTeam() {
+        await this.setState({
+            update: true,
+            startcaptainid: this.state.captainid,
+            starttopid: this.state.topid,
+            startjungleid: this.state.jungleid,
+            startmidid: this.state.midid,
+            startadcid: this.state.adcid,
+            startsupportid: this.state.supportid,
+        });
     }
 
     submitUpdate(e) {
         e.preventDefault();
+
+        const freelance = 'Freelance';
+        const captain = 'Captain';
+        const user = 'User';
+
+        //Captain changes
+        if (this.state.startcaptainid !== this.state.captainid) {
+            fetch(`${URI}/accountstatus/${this.state.startcaptainid}`, {
+                method: "PATCH",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ status: user })
+            });
+            fetch(`${URI}/accountstatus/${this.state.captainid}`, {
+                method: "PATCH",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ status: captain })
+            });
+            this.setState({ change: true });
+        }
+        //Top changes
+        if (this.state.starttopid !== this.state.topid) {
+            fetch(`${URI}/users/teamupdate/${this.state.starttopid}`, {
+                method: 'PATCH',
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ team: freelance })
+            });
+            fetch(`${URI}/users/teamupdate/${this.state.topid}`, {
+                method: 'PATCH',
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ team: this.state.teamabr })
+            });
+            this.setState({ change: true });
+        }
+        //Jungle changes
+        if (this.state.startjungleid !== this.state.jungleid) {
+            fetch(`${URI}/users/teamupdate/${this.state.startjungleid}`, {
+                method: 'PATCH',
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ team: freelance })
+            });
+            fetch(`${URI}/users/teamupdate/${this.state.jungleid}`, {
+                method: 'PATCH',
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ team: this.state.teamabr })
+            });
+            this.setState({ change: true });
+        }
+        //Mid changes
+        if (this.state.startmidid !== this.state.midid) {
+            fetch(`${URI}/users/teamupdate/${this.state.startmidid}`, {
+                method: 'PATCH',
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ team: freelance })
+            });
+            fetch(`${URI}/users/teamupdate/${this.state.midid}`, {
+                method: 'PATCH',
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ team: this.state.teamabr })
+            });
+            this.setState({ change: true });
+        }
+
+        //ADC changes
+        if (this.state.startadcid !== this.state.adcid) {
+            fetch(`${URI}/users/teamupdate/${this.state.startadcid}`, {
+                method: 'PATCH',
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ team: freelance })
+            });
+            fetch(`${URI}/users/teamupdate/${this.state.adcid}`, {
+                method: 'PATCH',
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ team: this.state.teamabr })
+            });
+            this.setState({ change: true });
+        }
+
+        //Support changes
+        if (this.state.startsupportid !== this.state.supportid) {
+            fetch(`${URI}/users/teamupdate/${this.state.startsupportid}`, {
+                method: 'PATCH',
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ team: freelance })
+            });
+            fetch(`${URI}/users/teamupdate/${this.state.supportid}`, {
+                method: 'PATCH',
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ team: this.state.teamabr })
+            });
+            this.setState({ change: true });
+        }
 
         const body = {
             teamname: this.state.teamname,
@@ -123,16 +267,60 @@ export default class team extends React.Component {
             support: this.state.support
         };
 
-        fetch(`${URI}/teams/${this.props.allTeams.teamid}`, {
-            method: 'PATCH',
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(body)
-        }).then(res => res.json()).then(res => console.log(res));
+        //Any changes
+        if (this.state.change === true) {
+            fetch(`${URI}/teams/${this.props.allTeams.teamid}`, {
+                method: 'PATCH',
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(body)
+            });
+        }
 
-        this.setState({ update: false });
+        this.setState({
+            update: false,
+            change: false
+        });
     }
 
     render() {
+
+        let sunday = 0;
+        let monday = 0;
+        let tuesday = 0;
+        let wednesday = 0;
+        let thursday = 0;
+        let friday = 0;
+        let saturday = 0;
+
+        let team = [];
+
+        for (let i = 0; i < this.state.allusers.length; i++) {
+            if (this.state.allusers[i].userid == this.state.topid) {
+                team.push(this.state.allusers[i]);
+            }
+            if (this.state.allusers[i].userid == this.state.jungleid) {
+                team.push(this.state.allusers[i]);
+            }
+            if (this.state.allusers[i].userid == this.state.midid) {
+                team.push(this.state.allusers[i]);
+            }
+            if (this.state.allusers[i].userid == this.state.adcid) {
+                team.push(this.state.allusers[i]);
+            }
+            if (this.state.allusers[i].userid == this.state.supportid) {
+                team.push(this.state.allusers[i]);
+            }
+        }
+
+        for (let i = 0; i < team.length; i++) {
+            if (team[i].sunday === true) sunday++;
+            if (team[i].monday === true) monday++;
+            if (team[i].tuesday === true) tuesday++;
+            if (team[i].wednesday === true) wednesday++;
+            if (team[i].thursday === true) thursday++;
+            if (team[i].friday === true) friday++;
+            if (team[i].saturday === true) saturday++;
+        }
 
         return (
             <div className="border">
@@ -161,10 +349,10 @@ export default class team extends React.Component {
                         <p></p>
                         <label htmlFor="captain" className="CaptainLabel">Captain: </label>
                         <select name="captain" id="captain" onChange={this.setCaptain}>
-                            <option key={this.props.allTeams.captain}
-                                uid={this.props.allTeams.captainid}
-                                id={this.props.allTeams.captain}
-                                value={this.props.allTeams.captain}>{this.props.allTeams.captain}</option>
+                            <option key={this.state.captain}
+                                uid={this.state.captainid}
+                                id={this.state.captain}
+                                value={this.state.captain}>{this.state.captain}</option>
                             {this.props.allUsers.map(allUsers => (
                                 <Option key={allUsers.userid} allUsers={allUsers} />
                             ))}
@@ -173,10 +361,10 @@ export default class team extends React.Component {
                     <div className="flex">
                         <label htmlFor="top">Top: </label>
                         <select name="top" id="top" onChange={this.setTop}>
-                            <option key={this.props.allTeams.top}
-                                uid={this.props.allTeams.topid}
-                                id={this.props.allTeams.top}
-                                value={this.props.allTeams.top}>{this.props.allTeams.top}</option>
+                            <option key={this.state.top}
+                                uid={this.state.topid}
+                                id={this.state.top}
+                                value={this.state.top}>{this.state.top}</option>
                             {this.props.topPlayers.map(topPlayers => (
                                 <Option key={topPlayers.userid} allUsers={topPlayers} />
                             ))}
@@ -184,10 +372,10 @@ export default class team extends React.Component {
                         <p></p>
                         <label htmlFor="jungle">Jungle: </label>
                         <select name="jungle" id="jungle" onChange={this.setJungle}>
-                            <option key={this.props.allTeams.jungle}
-                                uid={this.props.allTeams.jungleid}
-                                id={this.props.allTeams.jungle}
-                                value={this.props.allTeams.jungle}>{this.props.allTeams.jungle}</option>
+                            <option key={this.state.jungle}
+                                uid={this.state.jungleid}
+                                id={this.state.jungle}
+                                value={this.state.jungle}>{this.state.jungle}</option>
                             {this.props.junglePlayers.map(junglePlayers => (
                                 <Option key={junglePlayers.userid} allUsers={junglePlayers} />
                             ))}
@@ -195,10 +383,10 @@ export default class team extends React.Component {
                         <p></p>
                         <label htmlFor="mid">Mid: </label>
                         <select name="mid" id="mid" onChange={this.setMid}>
-                            <option key={this.props.allTeams.mid}
-                                uid={this.props.allTeams.midid}
-                                id={this.props.allTeams.mid}
-                                value={this.props.allTeams.mid}>{this.props.allTeams.mid}</option>
+                            <option key={this.state.mid}
+                                uid={this.state.midid}
+                                id={this.state.mid}
+                                value={this.state.mid}>{this.state.mid}</option>
                             {this.props.midPlayers.map(midPlayers => (
                                 <Option key={midPlayers.userid} allUsers={midPlayers} />
                             ))}
@@ -206,10 +394,10 @@ export default class team extends React.Component {
                         <p></p>
                         <label htmlFor="adc">ADC: </label>
                         <select name="adc" id="adc" onChange={this.setADC}>
-                            <option key={this.props.allTeams.adc}
-                                uid={this.props.allTeams.adcid}
-                                id={this.props.allTeams.adc}
-                                value={this.props.allTeams.adc}>{this.props.allTeams.adc}</option>
+                            <option key={this.state.adc}
+                                uid={this.state.adcid}
+                                id={this.state.adc}
+                                value={this.state.adc}>{this.state.adc}</option>
                             {this.props.adcPlayers.map(adcPlayers => (
                                 <Option key={adcPlayers.userid} allUsers={adcPlayers} />
                             ))}
@@ -217,10 +405,10 @@ export default class team extends React.Component {
                         <p></p>
                         <label htmlFor="support">Support: </label>
                         <select name="support" id="support" onChange={this.setSupport}>
-                            <option key={this.props.allTeams.support}
-                                uid={this.props.allTeams.supportid}
-                                id={this.props.allTeams.support}
-                                value={this.props.allTeams.support}>{this.props.allTeams.support}</option>
+                            <option key={this.state.support}
+                                uid={this.state.supportid}
+                                id={this.state.support}
+                                value={this.state.support}>{this.state.support}</option>
                             {this.props.supportPlayers.map(supportPlayers => (
                                 <Option key={supportPlayers.userid} allUsers={supportPlayers} />
                             ))}
@@ -228,9 +416,12 @@ export default class team extends React.Component {
                     </div>
                     <br></br>
                 </div>}
+                <h4>Best day(s) to play: {sunday >= 4 && <p>Sunday</p>}{monday >= 4 && <p>Monday</p>}{tuesday >= 4 && <p>Tuesday</p>}
+                    {wednesday >= 4 && <p>Wednesday</p>}{thursday >= 4 && <p>Thursday</p>}{friday >= 4 && <p>Friday</p>}{saturday >= 4 && <p>Saturday</p>}</h4>
                 {this.state.update === true && <button type="submit" onClick={(e) => { this.submitUpdate(e) }}>Submit</button>}
                 {(this.state.update === false && (this.props.userStatus === 'Captain' || this.props.userStatus === 'Admin')) && <button type="button" onClick={() => { this.updateTeam() }}>Update Team</button>}
-                {this.props.userStatus === 'Admin' && <button type="button" onClick={() => { this.deleteTeam() }}>Delete Team</button>}
+                {this.state.update === true && <button type="button" onClick={(e) => { this.setState({ update: false }) }}>Cancel</button>}
+                {(this.state.update === false && this.props.userStatus === 'Admin') && <button type="button" onClick={() => { this.deleteTeam() }}>Delete Team</button>}
             </div>
         )
     }

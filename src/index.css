@@ -46,6 +46,9 @@ footer {
   font-weight: bold;
 }
 
+.redletter {
+  color: red;
+}
 
 button {
   margin: 5px;

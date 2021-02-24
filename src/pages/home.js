@@ -69,9 +69,11 @@ const Home = () => {
     const bootup = async () => {
         if (window.sessionStorage.getItem('x-auth-token')) {
             const x_auth_token = window.sessionStorage.getItem('x-auth-token');
-            await fetch(`${URI}/decode`, {
+            await fetch(`${URI}/auth/decode`, {
                 headers: { "x-auth-token": x_auth_token }
-            }).then(res => res.json()).then(response => setUserStatus(response.status));
+            }).then(res => res.json()).then(response => {
+                if (response.status) setUserStatus(response.status)
+            });
         }
     };
 
@@ -97,6 +99,7 @@ const Home = () => {
                 {allTeams.map(allTeams => (
                     <Team key={allTeams.teamname}
                         update={false}
+                        change={false}
                         allTeams={allTeams}
                         userStatus={userStatus}
                         allUsers={allUsers}
