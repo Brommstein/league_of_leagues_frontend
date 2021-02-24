@@ -16,7 +16,7 @@ const LoginForm = () => {
 
         const body = {
             username: username,
-            password: password
+            _password: password
         }
 
         // eslint-disable-next-line no-unused-vars
@@ -24,15 +24,17 @@ const LoginForm = () => {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(body)
-        }).then(res => res.json()).then(result => {
-            if (result.token) {
-                window.sessionStorage.setItem('x-auth-token', result.token);
-                window.location = '/';
-            };
-            if (!result.token) {
-                setmessage(result.message);
-            }
         })
+            .then(res => res.json())
+            .then(result => {
+                if (result.token) {
+                    window.sessionStorage.setItem('x-auth-token', result.token);
+                    window.location = '/';
+                };
+                if (!result.token) {
+                    setmessage(result.message);
+                }
+            })
     };
 
     //check auth token if available
