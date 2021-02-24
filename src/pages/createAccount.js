@@ -86,6 +86,8 @@ const CreateAccount = () => {
                 .then(userResponse => userResponse.json())
                 .then(uResponse => uResponse.pop().userid);
 
+            console.table(userid);
+
             //body for /accounts db
             const accountBody = {
                 userid: userid,
