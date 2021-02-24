@@ -76,15 +76,11 @@ const CreateAccount = () => {
                 team: team
             };
 
-            await fetch(`${URI}/users`, {
+            const userid = await fetch(`${URI}/users`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(userBody)
             })
-                .then(userResponse => userResponse.json())
-                .then(uResponse => console.table(uResponse));
-
-            const userid = await fetch(`${URI}/users`)
                 .then(userResponse => userResponse.json())
                 .then(uResponse => uResponse.pop().userid);
 
