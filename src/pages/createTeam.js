@@ -77,7 +77,7 @@ const CreateTeam = () => {
                 captainid: captainid,
                 captain: captain,
                 topid: topid,
-                top: top,
+                _top: top,
                 jungleid: jungleid,
                 jungle: jungle,
                 midid: midid,
@@ -88,8 +88,7 @@ const CreateTeam = () => {
                 support: support
             }
 
-            // eslint-disable-next-line no-unused-vars
-            const response = await fetch(`${URI}/teams`, {
+            await fetch(`${URI}/teams`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(body)
@@ -99,8 +98,7 @@ const CreateTeam = () => {
                 status: 'Captain'
             }
 
-            // eslint-disable-next-line no-unused-vars
-            const update = await fetch(`${URI}/accountstatus/${captainid}`, {
+            await fetch(`${URI}/accountstatus/${captainid}`, {
                 method: "PATCH",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(updatebody)
@@ -110,42 +108,37 @@ const CreateTeam = () => {
                 team: teamAbr
             }
 
-            // eslint-disable-next-line no-unused-vars
-            const teamTop = await fetch(`${URI}/users/teamupdate/${topid}`, {
+            await fetch(`${URI}/users/teamupdate/${topid}`, {
                 method: "PATCH",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(teambody)
             })
 
-            // eslint-disable-next-line no-unused-vars
-            const teamJungle = await fetch(`${URI}/users/teamupdate/${jungleid}`, {
+            await fetch(`${URI}/users/teamupdate/${jungleid}`, {
                 method: "PATCH",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(teambody)
             })
 
-            // eslint-disable-next-line no-unused-vars
-            const teamMid = await fetch(`${URI}/users/teamupdate/${midid}`, {
+            await fetch(`${URI}/users/teamupdate/${midid}`, {
                 method: "PATCH",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(teambody)
             })
 
-            // eslint-disable-next-line no-unused-vars
-            const teamADC = await fetch(`${URI}/users/teamupdate/${adcid}`, {
+            await fetch(`${URI}/users/teamupdate/${adcid}`, {
                 method: "PATCH",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(teambody)
             })
 
-            // eslint-disable-next-line no-unused-vars
-            const teamSupport = await fetch(`${URI}/users/teamupdate/${supportid}`, {
+            await fetch(`${URI}/users/teamupdate/${supportid}`, {
                 method: "PATCH",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(teambody)
             })
 
-            window.location = "/";
+            //window.location = "/";
 
         } catch (err) {
             console.error(err.message);
