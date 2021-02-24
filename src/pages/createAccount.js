@@ -60,6 +60,8 @@ const CreateAccount = () => {
             if (availability[i] === 'saturday') { saturday = true };
         }
 
+        console.log('Test');
+
         try {
             //body for /users db
             const userBody = {
