@@ -95,7 +95,7 @@ const CreateTeam = () => {
             });
 
             const updatebody = {
-                status: 'Captain'
+                _status: 'Captain'
             }
 
             await fetch(`${URI}/accountstatus/${captainid}`, {
