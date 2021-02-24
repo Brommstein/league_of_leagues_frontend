@@ -343,6 +343,7 @@ export default class team extends React.Component {
         let thursday = 0;
         let friday = 0;
         let saturday = 0;
+        let bestDay = '';
 
         let team = [];
 
@@ -373,6 +374,14 @@ export default class team extends React.Component {
             if (team[i].friday === true) friday++;
             if (team[i].saturday === true) saturday++;
         }
+
+        if (sunday >= 4) { bestDay += 'Sunday' };
+        if (monday >= 4) { bestDay += 'Monday' };
+        if (tuesday >= 4) { bestDay += 'Tuesday' };
+        if (wednesday >= 4) { bestDay += 'Wednesday' };
+        if (thursday >= 4) { bestDay += 'Thursday' };
+        if (friday >= 4) { bestDay += 'Friday' };
+        if (saturday >= 4) { bestDay += 'Saturday' };
 
         return (
             <div className="border">
@@ -468,8 +477,8 @@ export default class team extends React.Component {
                     </div>
                     <br></br>
                 </div>}
-                <h4>Best day(s) to play: {sunday >= 4 && <p>Sunday</p>}{monday >= 4 && <p>Monday</p>}{tuesday >= 4 && <p>Tuesday</p>}
-                    {wednesday >= 4 && <p>Wednesday</p>}{thursday >= 4 && <p>Thursday</p>}{friday >= 4 && <p>Friday</p>}{saturday >= 4 && <p>Saturday</p>}</h4>
+                <h4>Best day(s) to play: {bestDay}</h4>
+
                 {this.state.update === true && <button type="submit" onClick={(e) => { this.submitUpdate(e) }}>Submit</button>}
                 {(this.state.update === false && (this.props.userStatus === 'Captain' || this.props.userStatus === 'Admin')) && <button type="button" onClick={() => { this.updateTeam() }}>Update Team</button>}
                 {this.state.update === true && <button type="button" onClick={(e) => { this.setState({ update: false }) }}>Cancel</button>}
