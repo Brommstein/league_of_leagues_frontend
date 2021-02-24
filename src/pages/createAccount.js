@@ -90,8 +90,8 @@ const CreateAccount = () => {
             const accountBody = {
                 userid: userid,
                 username: userName,
-                password: password,
-                status: status
+                _password: password,
+                _status: status
             }
 
             console.log({ accountBody });
