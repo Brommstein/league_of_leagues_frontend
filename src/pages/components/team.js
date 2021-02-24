@@ -17,7 +17,7 @@ export default class team extends React.Component {
             captain: this.props.allTeams.captain,
             topid: this.props.allTeams.topid,
             starttopid: '',
-            top: this.props.allTeams.top,
+            top: this.props.allTeams._top,
             jungleid: this.props.allTeams.jungleid,
             startjungleid: '',
             jungle: this.props.allTeams.jungle,
