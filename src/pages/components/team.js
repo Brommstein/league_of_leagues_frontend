@@ -168,12 +168,12 @@ export default class team extends React.Component {
             fetch(`${URI}/accountstatus/${this.state.startcaptainid}`, {
                 method: "PATCH",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ status: user })
+                body: JSON.stringify({ _status: user })
             });
             fetch(`${URI}/accountstatus/${this.state.captainid}`, {
                 method: "PATCH",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ status: captain })
+                body: JSON.stringify({ _status: captain })
             });
             this.setState({ change: true });
         }
