@@ -101,7 +101,8 @@ const CreateAccount = () => {
             })
                 .then(result => result.json())
                 .then(result => {
-                    window.sessionStorage.setItem('x-auth-token', result.token);
+                    if (result.token) window.sessionStorage.setItem('x-auth-token', result.token);
+                    if (result.message) setmessage(result.message);
                 })
 
             //window.location = "/";
