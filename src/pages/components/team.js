@@ -170,6 +170,32 @@ export default class team extends React.Component {
                 headers: { 'Content-Type': "application/json" },
                 body: JSON.stringify({ teamabr: this.state.teamabr })
             })
+            fetch(`${URI}/users/teamupdate/${this.state.topid}`, {
+                method: 'PATCH',
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ team: this.state.teamabr })
+            });
+            fetch(`${URI}/users/teamupdate/${this.state.jungleid}`, {
+                method: 'PATCH',
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ team: this.state.teamabr })
+            });
+            fetch(`${URI}/users/teamupdate/${this.state.midid}`, {
+                method: 'PATCH',
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ team: this.state.teamabr })
+            });
+            fetch(`${URI}/users/teamupdate/${this.state.adcid}`, {
+                method: 'PATCH',
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ team: this.state.teamabr })
+            });
+            fetch(`${URI}/users/teamupdate/${this.state.supportid}`, {
+                method: 'PATCH',
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ team: this.state.teamabr })
+            });
+            this.setState({ change: true });
         }
 
         //Team name change
@@ -178,7 +204,8 @@ export default class team extends React.Component {
                 method: "PATCH",
                 headers: { 'Content-Type': "application/json" },
                 body: JSON.stringify({ teamname: this.state.teamname })
-            })
+            });
+            this.setState({ change: true });
         }
 
         const freelance = 'Freelance';
