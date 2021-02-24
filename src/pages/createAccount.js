@@ -60,8 +60,6 @@ const CreateAccount = () => {
             if (availability[i] === 'saturday') { saturday = true };
         }
 
-        console.log('Test');
-
         try {
             //body for /users db
             const userBody = {
@@ -78,8 +76,6 @@ const CreateAccount = () => {
                 team: team
             };
 
-            console.table(userBody);
-
             const userid = await fetch(`${URI}/users`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -87,12 +83,8 @@ const CreateAccount = () => {
             })
                 .then(userResponse => userResponse.json())
                 .then(uResponse => {
-                    console.log('UResponse');
-                    console.table(uResponse);
                     return uResponse.userid;
                 });
-
-            console.log('userid', userid);
 
             //body for /accounts db
             const accountBody = {
@@ -101,6 +93,10 @@ const CreateAccount = () => {
                 password: password,
                 status: status
             }
+
+            console.log({ accountBody });
+
+            console.log('Starting /accountstatus post');
 
             await fetch(`${URI}/accountstatus`, {
                 method: "POST",
