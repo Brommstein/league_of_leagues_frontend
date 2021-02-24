@@ -11,7 +11,9 @@ export default class team extends React.Component {
             change: this.props.change,
             allusers: this.props.allUsers,
             teamabr: this.props.allTeams.teamabr,
+            startteamabr: '',
             teamname: this.props.allTeams.teamname,
+            startteamname: '',
             captainid: this.props.allTeams.captainid,
             startcaptainid: '',
             captain: this.props.allTeams.captain,
@@ -141,12 +143,14 @@ export default class team extends React.Component {
             body: JSON.stringify({ team: freelance })
         });
 
-        //window.location = '/';
+        window.location = '/';
     }
 
     async updateTeam() {
         await this.setState({
             update: true,
+            startteamabr: this.state.teamabr,
+            startteamname: this.state.teamname,
             startcaptainid: this.state.captainid,
             starttopid: this.state.topid,
             startjungleid: this.state.jungleid,
@@ -158,6 +162,24 @@ export default class team extends React.Component {
 
     submitUpdate(e) {
         e.preventDefault();
+
+        //Team abr change
+        if (this.state.startteamabr !== this.state.teamabr) {
+            fetch(`${URI}/teams/${this.props.allTeams.teamid}`, {
+                method: "PATCH",
+                headers: { 'Content-Type': "application/json" },
+                body: JSON.stringify({ teamabr: this.state.teamabr })
+            })
+        }
+
+        //Team name change
+        if (this.state.startteamname !== this.state.teamname) {
+            fetch(`${URI}/teams/${this.props.allTeams.teamid}`, {
+                method: "PATCH",
+                headers: { 'Content-Type': "application/json" },
+                body: JSON.stringify({ teamname: this.state.teamname })
+            })
+        }
 
         const freelance = 'Freelance';
         const captain = 'Captain';
