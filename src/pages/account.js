@@ -54,14 +54,13 @@ const AccountEdit = () => {
                 saturday: saturday
             };
 
-            // eslint-disable-next-line no-unused-vars
-            const response = await fetch(`${URI}/users/${userid}`, {
+            await fetch(`${URI}/users/${userid}`, {
                 method: "PATCH",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(body)
             });
 
-            //window.location = "/";
+            window.location = "/";
 
         } catch (err) {
             console.error(err.message);
