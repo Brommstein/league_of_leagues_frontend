@@ -141,7 +141,7 @@ export default class team extends React.Component {
             body: JSON.stringify({ team: freelance })
         });
 
-        window.location = '/';
+        //window.location = '/';
     }
 
     async updateTeam() {
@@ -177,6 +177,7 @@ export default class team extends React.Component {
             });
             this.setState({ change: true });
         }
+
         //Top changes
         if (this.state.starttopid !== this.state.topid) {
             fetch(`${URI}/users/teamupdate/${this.state.starttopid}`, {
@@ -191,6 +192,7 @@ export default class team extends React.Component {
             });
             this.setState({ change: true });
         }
+
         //Jungle changes
         if (this.state.startjungleid !== this.state.jungleid) {
             fetch(`${URI}/users/teamupdate/${this.state.startjungleid}`, {
@@ -205,6 +207,7 @@ export default class team extends React.Component {
             });
             this.setState({ change: true });
         }
+
         //Mid changes
         if (this.state.startmidid !== this.state.midid) {
             fetch(`${URI}/users/teamupdate/${this.state.startmidid}`, {
