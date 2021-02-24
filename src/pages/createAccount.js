@@ -78,6 +78,8 @@ const CreateAccount = () => {
                 team: team
             };
 
+            console.table(userBody);
+
             const userid = await fetch(`${URI}/users`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
