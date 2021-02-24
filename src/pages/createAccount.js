@@ -86,7 +86,10 @@ const CreateAccount = () => {
                 body: JSON.stringify(userBody)
             })
                 .then(userResponse => userResponse.json())
-                .then(uResponse => console.table(uResponse));
+                .then(uResponse => {
+                    console.log('UResponse');
+                    console.table(uResponse);
+                });
 
             console.log(userid);
 
