@@ -89,9 +89,10 @@ const CreateAccount = () => {
                 .then(uResponse => {
                     console.log('UResponse');
                     console.table(uResponse);
+                    return uResponse.userid;
                 });
 
-            console.log(userid);
+            console.log('userid', userid);
 
             //body for /accounts db
             const accountBody = {
