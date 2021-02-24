@@ -138,7 +138,7 @@ const CreateTeam = () => {
                 body: JSON.stringify(teambody)
             })
 
-            //window.location = "/";
+            window.location = "/";
 
         } catch (err) {
             console.error(err.message);
