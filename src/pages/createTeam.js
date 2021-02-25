@@ -169,7 +169,6 @@ const CreateTeam = () => {
             {userStatus && <div>
                 {isLoading && <div>Page is loading</div>}
                 {!isLoading && <div>
-                    <h2>Just need to work on design</h2>
                     <form className="border" onSubmit={onSubmit}>
                         <section>
                             <label htmlFor="teamName">What is your team's name?</label>

@@ -16,7 +16,7 @@ export default class player extends React.Component {
     render() {
         return (
             <div>
-                <div className="flex border">
+                <div className="flex member border">
                     <h4>{this.props.players.leaguename}</h4>
                     <h4>Team: {this.props.players.team}</h4>
                     <p>Primary role: {this.props.players.preferedrole}</p>

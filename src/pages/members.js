@@ -68,7 +68,7 @@ const Members = () => {
             {isLoading && <div><h1>Page is loading</h1></div>}
             {!isLoading && <div>
                 <nav>
-                    <div className="flexBox">
+                    <div className="navflexBox">
                         <Link to="/" className="navFlex">Back</Link>
                         <p className="navFlex"></p>
                         <p className="navFlex"></p>
@@ -77,9 +77,8 @@ const Members = () => {
                 </nav>
 
                 <section>
-                    <h2>Needs to be worked on! (Design, and modifying team data)</h2>
-                    {topPlayers.length > 0 && <h3>Top Laners</h3>}
-                    <div className="flexBox">
+                    {topPlayers.length > 0 && <h2>Top Laners</h2>}
+                    <div className="flexBox member">
                         {topPlayers.map(topPlayers => (
                             <Players key={topPlayers.leaguename} players={topPlayers} userStatus={userStatus} />
                         ))}
@@ -88,8 +87,8 @@ const Members = () => {
                 <br />
 
                 <section>
-                    {junglePlayers.length > 0 && <h3>Junglers</h3>}
-                    <div className="flexBox">
+                    {junglePlayers.length > 0 && <h2>Junglers</h2>}
+                    <div className="flexBox member">
                         {junglePlayers.map(junglePlayers => (
                             <Players key={junglePlayers.leaguename} players={junglePlayers} userStatus={userStatus} />
                         ))}
@@ -98,8 +97,8 @@ const Members = () => {
                 <br />
 
                 <section>
-                    {midPlayers.length > 0 && <h3>Mid Laners</h3>}
-                    <div className="flexBox">
+                    {midPlayers.length > 0 && <h2>Mid Laners</h2>}
+                    <div className="flexBox member">
                         {midPlayers.map(midPlayers => (
                             <Players key={midPlayers.leaguename} players={midPlayers} userStatus={userStatus} />
                         ))}
@@ -108,8 +107,8 @@ const Members = () => {
                 <br />
 
                 <section>
-                    {adcPlayers.length > 0 && <h3>ADCs</h3>}
-                    <div className="flexBox">
+                    {adcPlayers.length > 0 && <h2>ADCs</h2>}
+                    <div className="flexBox member">
                         {adcPlayers.map(adcPlayers => (
                             <Players key={adcPlayers.leaguename} players={adcPlayers} userStatus={userStatus} />
                         ))}
@@ -118,8 +117,8 @@ const Members = () => {
                 <br />
 
                 <section>
-                    {supportPlayers.length > 0 && <h3>Supports</h3>}
-                    <div className="flexBox">
+                    {supportPlayers.length > 0 && <h2>Supports</h2>}
+                    <div className="flexBox member">
                         {supportPlayers.map(supportPlayers => (
                             <Players key={supportPlayers.leaguename} players={supportPlayers} userStatus={userStatus} />
                         ))}

@@ -84,7 +84,7 @@ const Home = () => {
     return (
         <div>
             {isLoading && <div>Page is loading</div>}
-            <nav className="flexBox">
+            <nav className="navflexBox">
                 {userStatus && <Link to="/createTeam" className="navFlex">Create a Team</Link>}
                 <Link to="/members" className="navFlex">League Members</Link>
                 {!userStatus && <p className="navFlex"></p>}
@@ -92,7 +92,6 @@ const Home = () => {
                 {userStatus && <Link to="/accountEdit" className="navFlex">Account</Link>}
                 <Log userStatus={userStatus} />
             </nav>
-            <h1>Just need to fix design</h1>
             <section>
                 <h2>Current Teams</h2>
                 {allTeams.map(allTeams => (

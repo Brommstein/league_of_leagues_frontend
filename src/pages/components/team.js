@@ -332,6 +332,7 @@ export default class team extends React.Component {
 
         this.setState({
             update: false,
+            updateday: false,
             change: false
         });
     }
@@ -401,12 +402,12 @@ export default class team extends React.Component {
         return (
             <div className="border">
                 {this.state.update === false && <div className="flexBox">
-                    <div className="flex">
+                    <div className="teamflex">
                         <h2>{this.state.teamabr}</h2>
                         <h3>{this.state.teamname}</h3>
                         <h4>Captain: {this.state.captain}</h4>
                     </div>
-                    <div className="flex">
+                    <div className="teamflex">
                         <p>Top: {this.state.top}</p>
                         <p>Jungle: {this.state.jungle}</p>
                         <p>Mid: {this.state.mid}</p>
@@ -416,7 +417,7 @@ export default class team extends React.Component {
                     <br></br>
                 </div>}
                 {this.state.update === true && <div className="flexBox">
-                    <div className="flex">
+                    <div className="teamflex">
                         <label htmlFor="teamabr" className="TeamAbrLabel">Team Abr: </label>
                         <input type="text" id="teamabr" onChange={this.setTeamabr} value={this.state.teamabr} placeholder={this.state.teamabr}></input>
                         <p></p>
@@ -434,7 +435,7 @@ export default class team extends React.Component {
                             ))}
                         </select>
                     </div>
-                    <div className="flex">
+                    <div className="teamflex">
                         <label htmlFor="top">Top: </label>
                         <select name="top" id="top" onChange={this.setTop}>
                             <option key={this.state.top}

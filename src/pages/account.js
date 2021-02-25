@@ -116,32 +116,32 @@ const AccountEdit = () => {
                     <p></p>
                     <div>
                         <p>What day are you able to play?</p>
-                        <div className="flexBox" id="availability">
-                            <div className="flex">
+                        <div className="flexBox member" id="availability">
+                            <div>
                                 <input type="checkbox" name="sundayBox" value="sunday"></input>
                                 <label htmlFor="sundayBox">Sunday</label>
                             </div>
-                            <div className="flex">
+                            <div>
                                 <input type="checkbox" name="mondayBox" value="monday"></input>
                                 <label htmlFor="mondayBox">Monday</label>
                             </div>
-                            <div className="flex">
+                            <div>
                                 <input type="checkbox" name="tuesdayBox" value="tuesday"></input>
                                 <label htmlFor="tuesdayBox">Tuesday</label>
                             </div>
-                            <div className="flex">
+                            <div>
                                 <input type="checkbox" name="wednesdayBox" value="wednesday"></input>
                                 <label htmlFor="wednesdayBox">Wednesday</label>
                             </div>
-                            <div className="flex">
+                            <div>
                                 <input type="checkbox" name="thursdayBox" value="thursday"></input>
                                 <label htmlFor="thursdayBox">Thursday</label>
                             </div>
-                            <div className="flex">
+                            <div>
                                 <input type="checkbox" name="fridayBox" value="friday"></input>
                                 <label htmlFor="fridayBox">Friday</label>
                             </div>
-                            <div className="flex">
+                            <div>
                                 <input type="checkbox" name="saturdayBox" value="saturday"></input>
                                 <label htmlFor="saturdayBox">Saturday</label>
                             </div>
