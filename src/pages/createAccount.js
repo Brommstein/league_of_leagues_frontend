@@ -94,10 +94,6 @@ const CreateAccount = () => {
                 _status: status
             }
 
-            console.log({ accountBody });
-
-            console.log('Starting /accountstatus post');
-
             await fetch(`${URI}/accountstatus`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -105,7 +101,6 @@ const CreateAccount = () => {
             })
                 .then(result => result.json())
                 .then(result => {
-                    console.table('/accountstatus results', result);
                     if (result.token) window.sessionStorage.setItem('x-auth-token', result.token);
                     if (result.message) setmessage(result.message);
                 })

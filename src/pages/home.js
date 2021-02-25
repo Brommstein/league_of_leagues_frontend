@@ -4,7 +4,6 @@ import Team from './components/team';
 import Log from './components/logstat';
 import URI from '../constance/URI';
 
-
 const Home = () => {
 
     const [userStatus, setUserStatus] = useState('');

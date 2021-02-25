@@ -8,6 +8,7 @@ export default class team extends React.Component {
         super(props);
         this.state = {
             update: this.props.update,
+            updateday: false,
             change: this.props.change,
             allusers: this.props.allUsers,
             teamabr: this.props.allTeams.teamabr,
@@ -31,7 +32,8 @@ export default class team extends React.Component {
             adc: this.props.allTeams.adc,
             supportid: this.props.allTeams.supportid,
             startsupportid: '',
-            support: this.props.allTeams.support
+            support: this.props.allTeams.support,
+            day: ''
         }
         this.setTeamabr = this.setTeamabr.bind(this);
         this.setTeamName = this.setTeamName.bind(this);
@@ -334,8 +336,13 @@ export default class team extends React.Component {
         });
     }
 
-    render() {
+    componentWillUpdate() {
+        if (this.state.updateday === false) {
+            this.day(this.props.allUsers, this.state.topid, this.state.jungleid, this.state.midid, this.state.adcid, this.state.supportid);
+        }
+    }
 
+    async day(users, top, jungle, mid, adc, support) {
         let sunday = 0;
         let monday = 0;
         let tuesday = 0;
@@ -343,25 +350,26 @@ export default class team extends React.Component {
         let thursday = 0;
         let friday = 0;
         let saturday = 0;
+
         let day = [];
 
         let team = [];
 
-        for (let i = 0; i < this.state.allusers.length; i++) {
-            if (this.state.allusers[i].userid == this.state.topid) {
-                team.push(this.state.allusers[i]);
+        for (let i = 0; i < users.length; i++) {
+            if (users[i].userid == top) {
+                team.push(users[i]);
             }
-            if (this.state.allusers[i].userid == this.state.jungleid) {
-                team.push(this.state.allusers[i]);
+            if (users[i].userid == jungle) {
+                team.push(users[i]);
             }
-            if (this.state.allusers[i].userid == this.state.midid) {
-                team.push(this.state.allusers[i]);
+            if (users[i].userid == mid) {
+                team.push(users[i]);
             }
-            if (this.state.allusers[i].userid == this.state.adcid) {
-                team.push(this.state.allusers[i]);
+            if (users[i].userid == adc) {
+                team.push(users[i]);
             }
-            if (this.state.allusers[i].userid == this.state.supportid) {
-                team.push(this.state.allusers[i]);
+            if (users[i].userid == support) {
+                team.push(users[i]);
             }
         }
 
@@ -383,8 +391,13 @@ export default class team extends React.Component {
         if (friday >= 4) { day.push('Friday') };
         if (saturday >= 4) { day.push('Saturday') };
 
-        console.log(day.join(', '))
+        if (day.length !== 0) {
+            this.setState({ day: day.join(', ') });
+            this.setState({ updateday: true });
+        }
+    }
 
+    render() {
         return (
             <div className="border">
                 {this.state.update === false && <div className="flexBox">
@@ -479,8 +492,9 @@ export default class team extends React.Component {
                     </div>
                     <br></br>
                 </div>}
-                <h4>Best day(s) to play: {day.join(', ')}</h4>
                 <p></p>
+                {this.state.updateday === true && <h4>Best day(s) to play: {this.state.day}...</h4>}
+
                 {this.state.update === true && <button type="submit" onClick={(e) => { this.submitUpdate(e) }}>Submit</button>}
                 {(this.state.update === false && (this.props.userStatus === 'Captain' || this.props.userStatus === 'Admin')) && <button type="button" onClick={() => { this.updateTeam() }}>Update Team</button>}
                 {this.state.update === true && <button type="button" onClick={(e) => { this.setState({ update: false }) }}>Cancel</button>}
