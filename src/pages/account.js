@@ -97,6 +97,7 @@ const AccountEdit = () => {
                     <p></p>
                     <label htmlFor="preferedRole">What is your prefered role? </label>
                     <select name="preferedRole" id="preferedRole">
+                        <option value=""></option>
                         <option value="top">Top</option>
                         <option value="jungle">Jungle</option>
                         <option value="mid">Mid</option>
