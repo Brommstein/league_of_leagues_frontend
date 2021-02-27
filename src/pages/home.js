@@ -93,9 +93,13 @@ const Home = () => {
                 <Log userStatus={userStatus} />
             </nav>
             <section>
+                <h2>Welcome to the Beer League Team Builder!</h2>
+                <p>This application is primarily to help individuals who enjoy
+                     playing league to join up and compete against other individuals!</p>
                 <h2>Getting Started!</h2>
                 <p>For new users head over to login and then create an account!</p>
-                <p>Returning members, login and checkout the members or create your own team to start playing with the league!</p>
+                <p>Returning members, login and checkout the members or
+                    create your own team to start playing with the league!</p>
             </section>
             <section>
                 <h2>Current Teams</h2>
