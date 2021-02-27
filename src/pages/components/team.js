@@ -343,7 +343,7 @@ export default class team extends React.Component {
         }
     }
 
-    async day(users, top, jungle, mid, adc, support) {
+    day(users, top, jungle, mid, adc, support) {
         let sunday = 0;
         let monday = 0;
         let tuesday = 0;
