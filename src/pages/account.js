@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import URI from '../constance/URI';
-
-//NEED TO CONNECT USER ID TO PAGE FOR PAGE TO WORK VIA USER AUTH
+import Log from './components/logstat';
 
 const AccountEdit = () => {
 
@@ -85,73 +84,85 @@ const AccountEdit = () => {
     });
 
     return (
-        <div className="border">
+        <div>
             {!userStatus && <h2>Not Authorized</h2>}
             {!userStatus && <Link to="/">Home</Link>}
             {userStatus && <div>
-                <label htmlFor="editAccount"><h2>Edit Account</h2></label>
-                <form name="editAccount" onSubmit={onSubmit}>
+                <nav>
+                    <div className="navflexBox">
+                        <Link to="/" className="navFlex">Home</Link>
+                        {!userStatus && <p className="navFlex"></p>}
+                        {!userStatus && <p className="navFlex"></p>}
+                        {userStatus && <Link to="/createTeam" className="navFlex">Create a Team</Link>}
+                        {userStatus && <Link to="/members" className="navFlex">League Members</Link>}
+                        <Log userStatus={userStatus} />
+                    </div>
+                </nav>
+                <section className="form">
+                    <label htmlFor="editAccount"><h2>Edit Account</h2></label>
+                    <form name="editAccount" className="accountform border" onSubmit={onSubmit}>
 
-                    <label htmlFor="leagueName">What is your new name on League of Legends? </label>
-                    <input type="text" value={leagueName} onChange={e => setLeagueName(e.target.value)}></input>
-                    <p></p>
-                    <label htmlFor="preferedRole">What is your prefered role? </label>
-                    <select name="preferedRole" id="preferedRole">
-                        <option value=""></option>
-                        <option value="top">Top</option>
-                        <option value="jungle">Jungle</option>
-                        <option value="mid">Mid</option>
-                        <option value="adc">ADC</option>
-                        <option value="support">Support</option>
-                    </select>
-                    <p></p>
-                    <label htmlFor="secondaryRole">What is your secondary role? </label>
-                    <select name="secondaryRole" id="secondaryRole">
-                        <option value=""></option>
-                        <option value="top">Top</option>
-                        <option value="jungle">Jungle</option>
-                        <option value="mid">Mid</option>
-                        <option value="adc">ADC</option>
-                        <option value="support">Support</option>
-                    </select>
-                    <p></p>
-                    <div>
-                        <p>What day are you able to play?</p>
-                        <div className="flexBox member" id="availability">
-                            <div>
-                                <input type="checkbox" name="sundayBox" value="sunday"></input>
-                                <label htmlFor="sundayBox">Sunday</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" name="mondayBox" value="monday"></input>
-                                <label htmlFor="mondayBox">Monday</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" name="tuesdayBox" value="tuesday"></input>
-                                <label htmlFor="tuesdayBox">Tuesday</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" name="wednesdayBox" value="wednesday"></input>
-                                <label htmlFor="wednesdayBox">Wednesday</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" name="thursdayBox" value="thursday"></input>
-                                <label htmlFor="thursdayBox">Thursday</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" name="fridayBox" value="friday"></input>
-                                <label htmlFor="fridayBox">Friday</label>
-                            </div>
-                            <div>
-                                <input type="checkbox" name="saturdayBox" value="saturday"></input>
-                                <label htmlFor="saturdayBox">Saturday</label>
+                        <label htmlFor="leagueName">What is your new name on League of Legends? </label>
+                        <input type="text" value={leagueName} onChange={e => setLeagueName(e.target.value)}></input>
+                        <p></p>
+                        <label htmlFor="preferedRole">What is your prefered role? </label>
+                        <select name="preferedRole" id="preferedRole">
+                            <option value=""></option>
+                            <option value="top">Top</option>
+                            <option value="jungle">Jungle</option>
+                            <option value="mid">Mid</option>
+                            <option value="adc">ADC</option>
+                            <option value="support">Support</option>
+                        </select>
+                        <p></p>
+                        <label htmlFor="secondaryRole">What is your secondary role? </label>
+                        <select name="secondaryRole" id="secondaryRole">
+                            <option value=""></option>
+                            <option value="top">Top</option>
+                            <option value="jungle">Jungle</option>
+                            <option value="mid">Mid</option>
+                            <option value="adc">ADC</option>
+                            <option value="support">Support</option>
+                        </select>
+                        <p></p>
+                        <div>
+                            <p>What day are you able to play?</p>
+                            <div className="flexBox member" id="availability">
+                                <div>
+                                    <input type="checkbox" name="sundayBox" value="sunday"></input>
+                                    <label htmlFor="sundayBox">Sunday</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="mondayBox" value="monday"></input>
+                                    <label htmlFor="mondayBox">Monday</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="tuesdayBox" value="tuesday"></input>
+                                    <label htmlFor="tuesdayBox">Tuesday</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="wednesdayBox" value="wednesday"></input>
+                                    <label htmlFor="wednesdayBox">Wednesday</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="thursdayBox" value="thursday"></input>
+                                    <label htmlFor="thursdayBox">Thursday</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="fridayBox" value="friday"></input>
+                                    <label htmlFor="fridayBox">Friday</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="saturdayBox" value="saturday"></input>
+                                    <label htmlFor="saturdayBox">Saturday</label>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <p></p>
-                    <button typeof="submit">Submit</button>
-                    <Link to="/">Cancel</Link>
-                </form>
+                        <p></p>
+                        <button typeof="submit">Submit</button>
+                        <Link to="/">Cancel</Link>
+                    </form>
+                </section>
             </div>}
         </div>
     )

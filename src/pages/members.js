@@ -69,9 +69,11 @@ const Members = () => {
             {!isLoading && <div>
                 <nav>
                     <div className="navflexBox">
-                        <Link to="/" className="navFlex">Back</Link>
-                        <p className="navFlex"></p>
-                        <p className="navFlex"></p>
+                        <Link to="/" className="navFlex">Home</Link>
+                        {!userStatus && <p className="navFlex"></p>}
+                        {!userStatus && <p className="navFlex"></p>}
+                        {userStatus && <Link to="/createTeam" className="navFlex">Create a Team</Link>}
+                        {userStatus && <Link to="/accountEdit" className="navFlex">Account</Link>}
                         <Log userStatus={userStatus} />
                     </div>
                 </nav>

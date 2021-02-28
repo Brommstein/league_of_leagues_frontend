@@ -400,7 +400,7 @@ export default class team extends React.Component {
 
     render() {
         return (
-            <div className="border">
+            <div className="border teamgroup">
                 {this.state.update === false && <div className="flexBox">
                     <div className="teamflex">
                         <h2>{this.state.teamabr}</h2>

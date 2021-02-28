@@ -2,6 +2,15 @@
 
 https://league-of-leagues.vercel.app/
 
+# UI Screenshots
+
+![alt text](src/screenshots/homePageLeagueofLeagues.png "Home Page")
+![alt text](src/screenshots/leagueofleagueslogin.png "Home Page")
+![alt text](src/screenshots/leagueofleaguesaccountcreation.png "Home Page")
+![alt text](src/screenshots/leagueofleaguesaccountedit.png "Home Page")
+![alt text](src/screenshots/leagueofleaguesmembers.png "Home Page")
+![alt text](src/screenshots/leagueofleaguesteamcreation.png "Home Page")
+
 # API's Documentation
 
 https://documenter.getpostman.com/view/14008387/TWDdhsz4
@@ -14,7 +23,7 @@ After logging in, checkout the current members in the league or create your own 
 
 # Summary of Application
 
-Quick team building/captain finding application that helps League of Legends players group up and play together. Along with an account creation and a team builder, the application also discplays what days that the teams are available for unofficial or official games.
+Quick team building/captain finding application that helps League of Legends players group up and play together. Along with an account creation and a team builder, the application also displays what days that the teams are available for unofficial or official games.
 
 # Created with
 

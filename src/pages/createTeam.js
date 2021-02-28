@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Option from './components/option';
 import URI from '../constance/URI';
+import Log from './components/logstat';
 
 const CreateTeam = () => {
 
@@ -169,12 +170,23 @@ const CreateTeam = () => {
             {userStatus && <div>
                 {isLoading && <div>Page is loading</div>}
                 {!isLoading && <div>
-                    <form className="border" onSubmit={onSubmit}>
+                    <nav>
+                        <div className="navflexBox">
+                            <Link to="/" className="navFlex">Home</Link>
+                            {!userStatus && <p className="navFlex"></p>}
+                            {!userStatus && <p className="navFlex"></p>}
+                            {userStatus && <Link to="/members" className="navFlex">League Members</Link>}
+                            {userStatus && <Link to="/accountEdit" className="navFlex">Account</Link>}
+                            <Log userStatus={userStatus} />
+                        </div>
+                    </nav>
+                    <label htmlFor="createTeam"><h2>Create a Team</h2></label>
+                    <form name="createTeam" className="teamform border" onSubmit={onSubmit}>
                         <section>
-                            <label htmlFor="teamName">What is your team's name?</label>
+                            <label htmlFor="teamName">What is your team's name? </label>
                             <input type="text" id="teamName"></input>
                             <p></p>
-                            <label htmlFor="teamAbr">What is your team's abreviation</label>
+                            <label htmlFor="teamAbr">What is your team's abreviation? </label>
                             <input type="text" id="teamAbr"></input>
                             <p></p>
                             <label htmlFor="captain">Who is the team leader? </label>

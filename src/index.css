@@ -7,6 +7,26 @@
   }
 }
 
+@media (min-device-width: 750px){
+  .accountform {
+    max-width: 700px;
+    min-height: 230px;
+  }
+}
+
+@media (min-device-width: 515px){
+  .teamform {
+    min-height: 345px;
+    min-width: 450px;
+  }
+}
+
+@media (min-device-width: 800px){
+  .creationform{
+    min-height: 345px;
+  }
+}
+
 html {
   width: 100%;
 }
@@ -120,7 +140,18 @@ nav {
 .border {
   border: solid 1px black;
   padding: 10px;
+  padding-top: 20px;
   margin: 20px;
+  margin-top: 10px;
   border-radius: 30px;
+}
+
+.form {
+  display: block;
+  text-align: center;
+}
+
+form {
+  display: inline-block;
 }
 
