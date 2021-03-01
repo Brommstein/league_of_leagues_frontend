@@ -4,13 +4,17 @@ https://league-of-leagues.vercel.app/
 
 # UI Screenshots
 
-![Screenshot](src/screenshots/homePageLeagueofLeagues.png "Home Page")
-<img src="./src/screenshots/homePageLeagueofLeagues.png" alt="Home Page"/>
-![alt text](src/screenshots/leagueofleagueslogin.png "Login Page")
-![alt text](src/screenshots/leagueofleaguesaccountcreation.png "Account Creation Page")
-![alt text](src/screenshots/leagueofleaguesaccountedit.png "Account Edit Page")
-![alt text](src/screenshots/leagueofleaguesmembers.png "Members Page")
-![alt text](src/screenshots/leagueofleaguesteamcreation.png "Team Creation Page")
+![homePageLeagueOfLeagues](https://user-images.githubusercontent.com/10673324/109452914-63f80580-7a16-11eb-9b0c-9f009f1c4570.PNG)
+
+![leagueofleagueslogin](https://user-images.githubusercontent.com/10673324/109453021-a588b080-7a16-11eb-852e-e2e63513a346.PNG)
+
+![leagueofleaguesaccountcreation](https://user-images.githubusercontent.com/10673324/109452971-80943d80-7a16-11eb-84f3-9742c2a34f17.PNG)
+
+![leagueofleaguesaccountedit](https://user-images.githubusercontent.com/10673324/109452988-9144b380-7a16-11eb-94d8-1f52a2ffe986.PNG)
+
+![leagueofleaguesmembers](https://user-images.githubusercontent.com/10673324/109453052-b76a5380-7a16-11eb-9d4e-6c91ae200d82.PNG)
+
+![leagueofleaguesteamcreation](https://user-images.githubusercontent.com/10673324/109453073-c0f3bb80-7a16-11eb-805b-9a40fe1a33c7.PNG)
 
 # API's Documentation
 
