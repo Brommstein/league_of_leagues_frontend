@@ -5,6 +5,7 @@ https://league-of-leagues.vercel.app/
 # UI Screenshots
 
 ![Screenshot](src/screenshots/homePageLeagueofLeagues.png "Home Page")
+<img src="./src/screenshots/homePageLeagueofLeagues.png" alt="Home Page"/>
 ![alt text](src/screenshots/leagueofleagueslogin.png "Login Page")
 ![alt text](src/screenshots/leagueofleaguesaccountcreation.png "Account Creation Page")
 ![alt text](src/screenshots/leagueofleaguesaccountedit.png "Account Edit Page")
