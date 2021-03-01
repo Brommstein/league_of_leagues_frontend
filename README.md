@@ -4,12 +4,12 @@ https://league-of-leagues.vercel.app/
 
 # UI Screenshots
 
-![alt text](src/screenshots/homePageLeagueofLeagues.png "Home Page")
-![alt text](src/screenshots/leagueofleagueslogin.png "Home Page")
-![alt text](src/screenshots/leagueofleaguesaccountcreation.png "Home Page")
-![alt text](src/screenshots/leagueofleaguesaccountedit.png "Home Page")
-![alt text](src/screenshots/leagueofleaguesmembers.png "Home Page")
-![alt text](src/screenshots/leagueofleaguesteamcreation.png "Home Page")
+![Screenshot](src/screenshots/homePageLeagueofLeagues.png "Home Page")
+![alt text](src/screenshots/leagueofleagueslogin.png "Login Page")
+![alt text](src/screenshots/leagueofleaguesaccountcreation.png "Account Creation Page")
+![alt text](src/screenshots/leagueofleaguesaccountedit.png "Account Edit Page")
+![alt text](src/screenshots/leagueofleaguesmembers.png "Members Page")
+![alt text](src/screenshots/leagueofleaguesteamcreation.png "Team Creation Page")
 
 # API's Documentation
 
